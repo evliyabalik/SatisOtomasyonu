@@ -15,7 +15,6 @@ namespace Perakende_Satış_Otomasyonu.Panels
     {
         Database data = new Database();
         int count;
-        string productID;
 
         public ÜrünKartları()
         {
@@ -39,8 +38,8 @@ namespace Perakende_Satış_Otomasyonu.Panels
         
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 if (data.IsHaveData("Select * from Urun","Urun_barkod",txtBarkod.Text) && data.IsHaveData("Select * from Urun", "Urun_adi", txtUrunAdi.Text)) 
                 {
                     data.AddNewProduct(txtBarkod.Text, cmbGrup.Text, txtUrunAdi.Text, cmbBirim.Text, Int32.Parse(txtKritikSeviye.Text), Decimal.Parse(txtBirimFiyati.Text));
@@ -50,15 +49,15 @@ namespace Perakende_Satış_Otomasyonu.Panels
                 }
                 else
                 {
-                    data.UpdateProduct(txtBarkod.Text,cmbGrup.Text,txtUrunAdi.Text,cmbBirim.Text,Int32.Parse(txtKritikSeviye.Text), decimal.Parse(txtBirimFiyati.Text), productID);
+                    data.UpdateProduct(txtBarkod.Text,cmbGrup.Text,txtUrunAdi.Text,cmbBirim.Text,Int32.Parse(txtKritikSeviye.Text), decimal.Parse(txtBirimFiyati.Text), Database.selectValueId);
                     lstUrunKartlari.Items.Clear();
                     data.AddDataListView(lstUrunKartlari);
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ürün Eklenemedi. " + ex);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Ürün Eklenemedi. " + ex);
+            //}
         }
 
         private void ÜrünKartları_Load(object sender, EventArgs e)
@@ -86,7 +85,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
         private void btnSil_Click(object sender, EventArgs e)
         {
 
-            if (productID!=null)
+            if (Database.selectValueId != null)
             {
                 data.Delete("Delete from Urun where Urun_id=" + Database.selectValueId);
 
