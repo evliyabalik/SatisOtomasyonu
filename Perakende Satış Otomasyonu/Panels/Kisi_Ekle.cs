@@ -42,7 +42,9 @@ namespace Perakende_Satış_Otomasyonu.Panels
             }
         }
 
-       
-
+        private void btnKapat_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }
