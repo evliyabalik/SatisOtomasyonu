@@ -34,7 +34,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.btnSil = new System.Windows.Forms.Button();
             this.btnUrunArama = new System.Windows.Forms.Button();
             this.btnKapat = new System.Windows.Forms.Button();
-            this.Adanba = new System.Windows.Forms.GroupBox();
+            this.UrunKartlari = new System.Windows.Forms.GroupBox();
             this.cmbBirim = new System.Windows.Forms.ComboBox();
             this.cmbGrup = new System.Windows.Forms.ComboBox();
             this.txtKritikSeviye = new System.Windows.Forms.TextBox();
@@ -59,7 +59,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblUrunSayisi = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.Adanba.SuspendLayout();
+            this.UrunKartlari.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -119,30 +119,30 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.btnKapat.UseVisualStyleBackColor = true;
             this.btnKapat.Click += new System.EventHandler(this.btnKapat_Click);
             // 
-            // Adanba
+            // UrunKartlari
             // 
-            this.Adanba.Controls.Add(this.cmbBirim);
-            this.Adanba.Controls.Add(this.cmbGrup);
-            this.Adanba.Controls.Add(this.txtKritikSeviye);
-            this.Adanba.Controls.Add(this.txtBirimFiyati);
-            this.Adanba.Controls.Add(this.txtUrunAdi);
-            this.Adanba.Controls.Add(this.txtBarkod);
-            this.Adanba.Controls.Add(this.btnGrupEkle);
-            this.Adanba.Controls.Add(this.label8);
-            this.Adanba.Controls.Add(this.label7);
-            this.Adanba.Controls.Add(this.label6);
-            this.Adanba.Controls.Add(this.label5);
-            this.Adanba.Controls.Add(this.label4);
-            this.Adanba.Controls.Add(this.label3);
-            this.Adanba.Controls.Add(this.label2);
-            this.Adanba.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Adanba.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Adanba.Location = new System.Drawing.Point(12, 39);
-            this.Adanba.Name = "Adanba";
-            this.Adanba.Size = new System.Drawing.Size(470, 175);
-            this.Adanba.TabIndex = 0;
-            this.Adanba.TabStop = false;
-            this.Adanba.Text = "Ürün Bilgileri";
+            this.UrunKartlari.Controls.Add(this.cmbBirim);
+            this.UrunKartlari.Controls.Add(this.cmbGrup);
+            this.UrunKartlari.Controls.Add(this.txtKritikSeviye);
+            this.UrunKartlari.Controls.Add(this.txtBirimFiyati);
+            this.UrunKartlari.Controls.Add(this.txtUrunAdi);
+            this.UrunKartlari.Controls.Add(this.txtBarkod);
+            this.UrunKartlari.Controls.Add(this.btnGrupEkle);
+            this.UrunKartlari.Controls.Add(this.label8);
+            this.UrunKartlari.Controls.Add(this.label7);
+            this.UrunKartlari.Controls.Add(this.label6);
+            this.UrunKartlari.Controls.Add(this.label5);
+            this.UrunKartlari.Controls.Add(this.label4);
+            this.UrunKartlari.Controls.Add(this.label3);
+            this.UrunKartlari.Controls.Add(this.label2);
+            this.UrunKartlari.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.UrunKartlari.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.UrunKartlari.Location = new System.Drawing.Point(12, 39);
+            this.UrunKartlari.Name = "UrunKartlari";
+            this.UrunKartlari.Size = new System.Drawing.Size(470, 175);
+            this.UrunKartlari.TabIndex = 0;
+            this.UrunKartlari.TabStop = false;
+            this.UrunKartlari.Text = "Ürün Bilgileri";
             // 
             // cmbBirim
             // 
@@ -364,7 +364,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.ClientSize = new System.Drawing.Size(494, 450);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.Adanba);
+            this.Controls.Add(this.UrunKartlari);
             this.Controls.Add(this.btnKapat);
             this.Controls.Add(this.btnUrunArama);
             this.Controls.Add(this.btnSil);
@@ -378,8 +378,8 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.Activated += new System.EventHandler(this.ÜrünKartları_Activated);
             this.Deactivate += new System.EventHandler(this.ÜrünKartları_Deactivate);
             this.Load += new System.EventHandler(this.ÜrünKartları_Load);
-            this.Adanba.ResumeLayout(false);
-            this.Adanba.PerformLayout();
+            this.UrunKartlari.ResumeLayout(false);
+            this.UrunKartlari.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -393,7 +393,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
         private System.Windows.Forms.Button btnSil;
         private System.Windows.Forms.Button btnUrunArama;
         private System.Windows.Forms.Button btnKapat;
-        private System.Windows.Forms.GroupBox Adanba;
+        private System.Windows.Forms.GroupBox UrunKartlari;
         private System.Windows.Forms.ComboBox cmbBirim;
         private System.Windows.Forms.ComboBox cmbGrup;
         private System.Windows.Forms.TextBox txtKritikSeviye;

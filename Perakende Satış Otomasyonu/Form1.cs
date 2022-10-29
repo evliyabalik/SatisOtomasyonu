@@ -57,5 +57,11 @@ namespace Perakende_Satış_Otomasyonu
             ÜrünKartları urunKartlari = new ÜrünKartları();
             urunKartlari.Show();
         }
+
+        private void kullanıcıHesaplarıToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Kisi_Ekle kisi = new Kisi_Ekle();
+            kisi.Show();
+        }
     }
 }
