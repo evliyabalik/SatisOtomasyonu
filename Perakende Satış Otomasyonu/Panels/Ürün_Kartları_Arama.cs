@@ -38,22 +38,32 @@ namespace Perakende_Satış_Otomasyonu.Panels
 
         private void btnKapat_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            lstSearchList.Items.Clear();
+
             if (rdbUrunAdi.Checked)
                 data.SearchData(lstSearchList, "select * from Urun where Urun_adi like '" + txtUrunAdi.Text + "'");
             else if (rdbBarkod.Checked)
                 data.SearchData(lstSearchList, "select * from Urun where Urun_barkod like '" + txtUrunAdi.Text + "'");
-                
+
+            
+
         }
 
         private void Ürün_Kartları_Arama_Load(object sender, EventArgs e)
         {
             if(!rdbBarkod.Checked && !rdbUrunAdi.Checked)
                 rdbUrunAdi.Checked = true;
+            data.AddDataListView(lstSearchList);
+        }
+
+        private void lstSearchList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

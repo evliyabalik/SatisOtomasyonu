@@ -29,9 +29,6 @@ namespace Perakende_Satış_Otomasyonu.Panels
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.lblUrunSayisi = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lstSearchList = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
@@ -44,44 +41,11 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.rdbBarkod = new System.Windows.Forms.RadioButton();
             this.btnKapat = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.btnIptal = new System.Windows.Forms.Button();
-            this.btnTumuArama = new System.Windows.Forms.Button();
             this.txtUrunAdi = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.Adanba.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.lblUrunSayisi);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(8, 419);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(470, 30);
-            this.panel1.TabIndex = 15;
-            this.panel1.Visible = false;
-            // 
-            // lblUrunSayisi
-            // 
-            this.lblUrunSayisi.AutoSize = true;
-            this.lblUrunSayisi.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblUrunSayisi.Location = new System.Drawing.Point(186, 4);
-            this.lblUrunSayisi.Name = "lblUrunSayisi";
-            this.lblUrunSayisi.Size = new System.Drawing.Size(17, 19);
-            this.lblUrunSayisi.TabIndex = 1;
-            this.lblUrunSayisi.Text = "0";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(26, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(157, 19);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Listelenen Ürün Sayısı:";
             // 
             // groupBox1
             // 
@@ -89,7 +53,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(8, 100);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(470, 315);
+            this.groupBox1.Size = new System.Drawing.Size(470, 352);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ürün Listesi";
@@ -105,10 +69,11 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.lstSearchList.HideSelection = false;
             this.lstSearchList.Location = new System.Drawing.Point(9, 19);
             this.lstSearchList.Name = "lstSearchList";
-            this.lstSearchList.Size = new System.Drawing.Size(452, 290);
+            this.lstSearchList.Size = new System.Drawing.Size(452, 327);
             this.lstSearchList.TabIndex = 0;
             this.lstSearchList.UseCompatibleStateImageBehavior = false;
             this.lstSearchList.View = System.Windows.Forms.View.Details;
+            this.lstSearchList.SelectedIndexChanged += new System.EventHandler(this.lstSearchList_SelectedIndexChanged);
             this.lstSearchList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
             // 
             // columnHeader1
@@ -142,8 +107,6 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.Adanba.Controls.Add(this.rdbBarkod);
             this.Adanba.Controls.Add(this.btnKapat);
             this.Adanba.Controls.Add(this.button1);
-            this.Adanba.Controls.Add(this.btnIptal);
-            this.Adanba.Controls.Add(this.btnTumuArama);
             this.Adanba.Controls.Add(this.txtUrunAdi);
             this.Adanba.Controls.Add(this.label4);
             this.Adanba.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -201,26 +164,6 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // btnIptal
-            // 
-            this.btnIptal.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnIptal.Location = new System.Drawing.Point(289, 19);
-            this.btnIptal.Name = "btnIptal";
-            this.btnIptal.Size = new System.Drawing.Size(61, 24);
-            this.btnIptal.TabIndex = 22;
-            this.btnIptal.Text = "İptal";
-            this.btnIptal.UseVisualStyleBackColor = true;
-            // 
-            // btnTumuArama
-            // 
-            this.btnTumuArama.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnTumuArama.Location = new System.Drawing.Point(222, 19);
-            this.btnTumuArama.Name = "btnTumuArama";
-            this.btnTumuArama.Size = new System.Drawing.Size(61, 24);
-            this.btnTumuArama.TabIndex = 16;
-            this.btnTumuArama.Text = "Tümü";
-            this.btnTumuArama.UseVisualStyleBackColor = true;
-            // 
             // txtUrunAdi
             // 
             this.txtUrunAdi.Location = new System.Drawing.Point(64, 49);
@@ -247,14 +190,11 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.BackColor = System.Drawing.Color.SkyBlue;
             this.ClientSize = new System.Drawing.Size(484, 464);
             this.ControlBox = false;
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.Adanba);
             this.Name = "Ürün_Kartları_Arama";
             this.Text = "Ürün Kartları";
             this.Load += new System.EventHandler(this.Ürün_Kartları_Arama_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.Adanba.ResumeLayout(false);
             this.Adanba.PerformLayout();
@@ -263,10 +203,6 @@ namespace Perakende_Satış_Otomasyonu.Panels
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label lblUrunSayisi;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
@@ -278,8 +214,6 @@ namespace Perakende_Satış_Otomasyonu.Panels
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnKapat;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btnIptal;
-        private System.Windows.Forms.Button btnTumuArama;
         private System.Windows.Forms.RadioButton rdbUrunAdi;
         private System.Windows.Forms.RadioButton rdbBarkod;
         public System.Windows.Forms.ListView lstSearchList;

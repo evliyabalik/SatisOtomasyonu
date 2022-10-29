@@ -197,6 +197,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.btnGrupEkle.TabIndex = 18;
             this.btnGrupEkle.Text = "Grup Ekle";
             this.btnGrupEkle.UseVisualStyleBackColor = true;
+            this.btnGrupEkle.Click += new System.EventHandler(this.btnGrupEkle_Click);
             // 
             // label8
             // 

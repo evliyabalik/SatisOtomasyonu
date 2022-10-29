@@ -14,7 +14,6 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
         private string ConnectionString { get { return "Data Source=DESKTOP-VFCQAL0\\MSSQL;Initial Catalog=SatisOtomasyonu;Integrated Security=True; MultipleActiveResultSets=True;"; } }
         private int _dataCound;
 
-
         private SqlConnection sql = new SqlConnection();
 
         public int DataCount { get { return _dataCound; } }
@@ -182,6 +181,32 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
             string getData = reader[data].ToString();
 
             return getData;
+        }
+
+        public void AddItemCmb(ComboBox cmb, string query, string data)
+        {
+            DatabaseConOpen();
+            
+            using (command = new SqlCommand(query, sql))
+            {
+                using (reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                        while (reader.Read())
+                        {
+                            cmb.Items.Add(reader[data].ToString());
+                        }
+                }
+            }
+        }
+
+        public void ExecuteCommand(string query)
+        {
+            DatabaseConOpen();
+            command = new SqlCommand(query, sql);
+            command.ExecuteNonQuery();
+            DatabaseConClose();
+
         }
 
         public bool IsHaveData(string query, string data, string value)

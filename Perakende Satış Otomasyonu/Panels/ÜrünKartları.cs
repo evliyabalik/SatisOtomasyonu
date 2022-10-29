@@ -63,8 +63,13 @@ namespace Perakende_Satış_Otomasyonu.Panels
         private void ÜrünKartları_Load(object sender, EventArgs e)
         {
             lblUrunSayisi.Text = lstUrunKartlari.Items.Count.ToString();
+            data.AddItemCmb(cmbGrup, "select * from GroupsTable", "Group_name");
+            data.AddItemCmb(cmbBirim, "select * from Units", "Unit_name");
 
-            
+            NewProductClick();
+
+
+
         }
 
         private void btnKapat_Click(object sender, EventArgs e)
@@ -138,10 +143,10 @@ namespace Perakende_Satış_Otomasyonu.Panels
         private void NewProductClick()
         {
             Database.selectValueId = null;
-            cmbGrup.Text = "Genel";
+            cmbGrup.Text = cmbGrup.Items[0].ToString();
             txtBarkod.Text = null;
             txtUrunAdi.Text = null;
-            cmbBirim.Text = "Adet";
+            cmbBirim.Text = cmbBirim.Items[0].ToString();
             txtKritikSeviye.Text = null;
             txtBirimFiyati.Text = null;
         }
@@ -155,6 +160,12 @@ namespace Perakende_Satış_Otomasyonu.Panels
         private void ÜrünKartları_Deactivate(object sender, EventArgs e)
         {
             NewProductClick();
+        }
+
+        private void btnGrupEkle_Click(object sender, EventArgs e)
+        {
+            data.ExecuteCommand("insert Into GroupsTable (Group_name) values('"+ cmbGrup.Text +"')");
+            cmbGrup.Items.Add(cmbGrup.Text);
         }
     }
 }
