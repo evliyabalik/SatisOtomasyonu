@@ -38,8 +38,8 @@ namespace Perakende_Satış_Otomasyonu.Panels
         
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 if (data.IsHaveData("Select * from Urun","Urun_barkod",txtBarkod.Text) && data.IsHaveData("Select * from Urun", "Urun_adi", txtUrunAdi.Text)) 
                 {
                     data.AddNewProduct(txtBarkod.Text, cmbGrup.Text, txtUrunAdi.Text, cmbBirim.Text, Int32.Parse(txtKritikSeviye.Text), Decimal.Parse(txtBirimFiyati.Text));
@@ -53,11 +53,11 @@ namespace Perakende_Satış_Otomasyonu.Panels
                     lstUrunKartlari.Items.Clear();
                     data.AddDataListView(lstUrunKartlari);
                 }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Ürün Eklenemedi. " + ex);
-            //}
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ürün Eklenemedi. " + ex);
+            }
         }
 
         private void ÜrünKartları_Load(object sender, EventArgs e)
