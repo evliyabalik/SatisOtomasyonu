@@ -76,6 +76,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
         private void btnKapat_Click(object sender, EventArgs e)
         {
             this.Hide();
+            Database.selectValueId = null;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -170,13 +171,23 @@ namespace Perakende_Satış_Otomasyonu.Panels
 
         private void ÜrünKartları_Deactivate(object sender, EventArgs e)
         {
-            NewProductClick();
+           // NewProductClick();
         }
 
         private void btnGrupEkle_Click(object sender, EventArgs e)
         {
             data.ExecuteCommand("insert Into GroupsTable (Group_name) values('"+ cmbGrup.Text +"')");
             cmbGrup.Items.Add(cmbGrup.Text);
+        }
+
+        private void ÜrünKartları_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            NewProductClick();
+        }
+
+        private void ÜrünKartları_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Database.selectValueId = null;
         }
     }
 }

@@ -212,6 +212,8 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.Name = "Ürün_Girişi";
             this.Text = "Ürün Girişi";
             this.Activated += new System.EventHandler(this.Ürün_Girişi_Activated);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Ürün_Girişi_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Ürün_Girişi_FormClosed);
             this.Load += new System.EventHandler(this.Ürün_Girişi_Load);
             this.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.Ürün_Girişi_ControlAdded);
             this.ResumeLayout(false);

@@ -190,6 +190,8 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.Name = "Ürün_Çıkışı";
             this.Text = "Ürün Çıkışı";
             this.Activated += new System.EventHandler(this.Ürün_Çıkışı_Activated);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Ürün_Çıkışı_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Ürün_Çıkışı_FormClosed);
             this.Load += new System.EventHandler(this.Ürün_Çıkışı_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

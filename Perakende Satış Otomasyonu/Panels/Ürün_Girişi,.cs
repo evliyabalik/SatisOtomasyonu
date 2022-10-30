@@ -89,6 +89,17 @@ namespace Perakende_Satış_Otomasyonu.Panels
         private void btnKapat_Click(object sender, EventArgs e)
         {
             this.Hide();
+            Database.selectValueId = null;
+        }
+
+        private void Ürün_Girişi_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Database.selectValueId = null;
+        }
+
+        private void Ürün_Girişi_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Database.selectValueId = null;
         }
     }
 }

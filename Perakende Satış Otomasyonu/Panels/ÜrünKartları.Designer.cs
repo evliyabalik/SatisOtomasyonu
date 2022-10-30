@@ -377,6 +377,8 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.Text = "ÜrünKartları";
             this.Activated += new System.EventHandler(this.ÜrünKartları_Activated);
             this.Deactivate += new System.EventHandler(this.ÜrünKartları_Deactivate);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ÜrünKartları_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ÜrünKartları_FormClosed);
             this.Load += new System.EventHandler(this.ÜrünKartları_Load);
             this.UrunKartlari.ResumeLayout(false);
             this.UrunKartlari.PerformLayout();
