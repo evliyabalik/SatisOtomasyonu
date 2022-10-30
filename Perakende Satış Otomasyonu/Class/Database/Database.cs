@@ -62,6 +62,34 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
             DatabaseConClose();
         }
 
+        public void AddDataToListview(string query,string[] dataArray, ListView lstView)
+        {
+            DatabaseConOpen();
+            
+            reader = GetReadData(query);
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    ListViewItem item = new ListViewItem();
+                    for (int i = 0; i < lstView.Columns.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            item.Text = (reader[dataArray[i].ToString()].ToString());
+                            continue;
+                        }
+                        item.SubItems.Add(reader[dataArray[i].ToString()].ToString());
+                        
+                    }
+                    lstView.Items.Add(item);
+                }
+            }
+
+            DatabaseConClose();
+        }
+
+
         public void AddListView(ListView listView, string urunBarkod, string urunGrup, string urunAdi, string urunBirimi, decimal urunFiyati)
         {
             ListViewItem item = new ListViewItem();
@@ -207,6 +235,20 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
             command.ExecuteNonQuery();
             DatabaseConClose();
 
+        }
+
+        public void DataAdapterMethod(DataGridView dgrid, string query)
+        {
+            DatabaseConOpen();
+            using (SqlDataAdapter dataAdapter=new SqlDataAdapter(query, sql))
+            {
+                using (DataSet ds=new DataSet())
+                {
+                    dataAdapter.Fill(ds);
+                    dgrid.DataSource = ds.Tables[0];
+                }
+            }
+            DatabaseConClose();
         }
 
         public bool IsHaveData(string query, string data, string value)

@@ -14,6 +14,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
     public partial class Kisi_Ekle : Form
     {
         Database data = new Database();
+        string[] dataName = { "User_name", "User_surname", "User_nickname", "User_position" };
         public Kisi_Ekle()
         {
             InitializeComponent();
@@ -22,27 +23,46 @@ namespace Perakende_Satış_Otomasyonu.Panels
 
         private void Kisi_Ekle_Load(object sender, EventArgs e)
         {
+            data.AddDataToListview("select * from Users" , dataName, lstUsers);
+
             data.AddItemCmb(cmbPosition, "select * from Personal_Positions", "Position_name");
             data.AddItemCmb(cmbYetki, "select * from Personal_Authority", "Authority_name");
 
-            cmbPosition.Text=cmbPosition.Items[0].ToString();
+            cmbPosition.Text = cmbPosition.Items[0].ToString();
             cmbYetki.Text = cmbYetki.Items[0].ToString();
         }
 
-        private void btnKaydet_Click(object sender, EventArgs e)
+        
+        
+        private void btnKaydet_Click_1(object sender, EventArgs e)
         {
-            if (txtSifre.Text != txtSifreTekrar.Text)
-                MessageBox.Show("Şifreler Aynı Değil!", "Dikkat");
-            else if (!data.IsHaveData("select * from Users", "User_nickname", txtKullaniciAdi.Text) && !data.IsHaveData("select * from Users", "User_email", txtEmail.Text))
-                MessageBox.Show("Kullanıcı Zaten Mevcut!", "Dikkat");
-            else
+            try
             {
-                data.ExecuteCommand("Insert into Users (User_name, User_surname, User_nickname, User_password, User_email, User_tel, User_position, User_authority) values ('" + txtAdi.Text + "','" + txtSoyadi.Text + "','" + txtKullaniciAdi.Text + "','" + txtSifre.Text + "','" + txtEmail.Text + "','" + txtCep.Text + "','" + cmbPosition.Text + "','" + cmbYetki.Text + "')");
-                MessageBox.Show("Kullanıcı Eklendi.", "Info");
+                if (txtAdi.Text != "" && txtSoyadi.Text != "" && txtKullaniciAdi.Text != "" && txtSifre.Text != "" && txtSifreTekrar.Text != "" && txtEmail.Text != "" && txtCep.Text != "")
+                {
+                    if (txtSifre.Text != txtSifreTekrar.Text)
+                        MessageBox.Show("Şifreler Aynı Değil!", "Dikkat");
+                    else if (!data.IsHaveData("select * from Users", "User_nickname", txtKullaniciAdi.Text) && !data.IsHaveData("select * from Users", "User_email", txtEmail.Text))
+                        MessageBox.Show("Kullanıcı Zaten Mevcut!", "Dikkat");
+                    else
+                    {
+                        data.ExecuteCommand("Insert into Users (User_name, User_surname, User_nickname, User_password, User_email, User_tel, User_position, User_authority) values ('" + txtAdi.Text + "','" + txtSoyadi.Text + "','" + txtKullaniciAdi.Text + "','" + txtSifre.Text + "','" + txtEmail.Text + "','" + txtCep.Text + "','" + cmbPosition.Text + "','" + cmbYetki.Text + "')");
+                        MessageBox.Show("Kullanıcı Eklendi.", "Info");
+                        lstUsers.Items.Clear();
+                        data.AddDataToListview("select * from Users", dataName, lstUsers);
+                    }
+                }
+                else
+                    MessageBox.Show("Lütfen Tüm Alanları Doldurun!", "Dikkat");
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Kullanıcı eklenemedi! Lütfen Bilgilerinizi Kontrol Ediniz.", "Dikkat");
             }
         }
 
-        private void btnKapat_Click(object sender, EventArgs e)
+        private void btnKapat_Click_1(object sender, EventArgs e)
         {
             this.Hide();
         }

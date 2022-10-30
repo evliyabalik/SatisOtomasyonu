@@ -366,43 +366,43 @@ namespace Perakende_Satış_Otomasyonu
             // firmaBilgileriToolStripMenuItem1
             // 
             this.firmaBilgileriToolStripMenuItem1.Name = "firmaBilgileriToolStripMenuItem1";
-            this.firmaBilgileriToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.firmaBilgileriToolStripMenuItem1.Size = new System.Drawing.Size(173, 22);
             this.firmaBilgileriToolStripMenuItem1.Text = "Firma Bilgileri";
             // 
             // kullanıcıHesaplarıToolStripMenuItem
             // 
             this.kullanıcıHesaplarıToolStripMenuItem.Name = "kullanıcıHesaplarıToolStripMenuItem";
-            this.kullanıcıHesaplarıToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.kullanıcıHesaplarıToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.kullanıcıHesaplarıToolStripMenuItem.Text = "Kullanıcı Hesapları";
             this.kullanıcıHesaplarıToolStripMenuItem.Click += new System.EventHandler(this.kullanıcıHesaplarıToolStripMenuItem_Click);
             // 
             // şifrelemeToolStripMenuItem
             // 
             this.şifrelemeToolStripMenuItem.Name = "şifrelemeToolStripMenuItem";
-            this.şifrelemeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.şifrelemeToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.şifrelemeToolStripMenuItem.Text = "Şifreleme";
             // 
             // lisansSözleşmesiToolStripMenuItem
             // 
             this.lisansSözleşmesiToolStripMenuItem.Name = "lisansSözleşmesiToolStripMenuItem";
-            this.lisansSözleşmesiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.lisansSözleşmesiToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.lisansSözleşmesiToolStripMenuItem.Text = "Lisans Sözleşmesi";
             // 
             // programHakkındaToolStripMenuItem
             // 
             this.programHakkındaToolStripMenuItem.Name = "programHakkındaToolStripMenuItem";
-            this.programHakkındaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.programHakkındaToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.programHakkındaToolStripMenuItem.Text = "Program Hakkında";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(170, 6);
             // 
             // programıKapatToolStripMenuItem
             // 
             this.programıKapatToolStripMenuItem.Name = "programıKapatToolStripMenuItem";
-            this.programıKapatToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.programıKapatToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.programıKapatToolStripMenuItem.Text = "Programı Kapat";
             // 
             // MainForm
