@@ -98,6 +98,16 @@ namespace Perakende_Satış_Otomasyonu.Panels
                 lstUrunKartlari.Items.Clear();
                 data.AddDataToListview("select * from Urun order by Urun_id Desc", dataName, lstUrunKartlari);
             }
+
+            if (!data.IsHaveData("Select * from Urun_cikis", "Urun_cikis_id", Database.selectValueId))
+            {
+                data.Delete("Delete from Urun_cikis where Urun_cikis_id=" + Database.selectValueId);
+            }
+
+            if (!data.IsHaveData("Select * from Urun_giris", "Urun_giris_id", Database.selectValueId))
+            {
+                data.Delete("Delete from Urun_giris where Urun_giris_id=" + Database.selectValueId);
+            }
         }
 
         private void btnYeniUrun_Click(object sender, EventArgs e)
