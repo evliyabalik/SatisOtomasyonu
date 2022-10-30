@@ -69,5 +69,11 @@ namespace Perakende_Satış_Otomasyonu
             Ürün_Girişi urunGiris = new Ürün_Girişi();
             urunGiris.Show();
         }
+
+        private void btnUrunCikisi_Click(object sender, EventArgs e)
+        {
+            Ürün_Çıkışı cikisUrun = new Ürün_Çıkışı();
+            cikisUrun.Show();
+        }
     }
 }

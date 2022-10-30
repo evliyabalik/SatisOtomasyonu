@@ -65,5 +65,30 @@ namespace Perakende_Satış_Otomasyonu.Panels
                 btnKaydet.BackColor = Color.White;
             }
         }
+
+        private void btnKaydet_Click(object sender, EventArgs e)
+        {
+            if (Database.selectValueId != null)
+            {
+
+                string urun_id = Database.selectValueId;
+                string tarih = cmbTarih.Text;
+                string aciklama = rtbAciklama.Text;
+                
+
+                txtBarkod.Text = data.GetData("select * from Urun where Urun_id like '" + Database.selectValueId + "' ", "Urun_barkod");
+                txtUrunAdi.Text = data.GetData("select * from Urun where Urun_id like '" + Database.selectValueId + "' ", "Urun_adi");
+
+                int girisFiyati = Int32.Parse(txtGirisFiyati.Text);
+                int giriMiktari = Int32.Parse(txtGirisMiktari.Text);
+
+                data.ExecuteCommand("insert into Urun_giris (Urun_giris_id, Urun_giris_tarih, Urun_giris_aciklama, Urun_giris_barkod, Urun_giris_adi, Urun_giris_fiyati, Urun_giris_miktari) values ('" + urun_id + "','" + tarih + "','" + aciklama + "','" + txtBarkod.Text + "','" + txtUrunAdi.Text + "','" + decimal.Parse(girisFiyati.ToString()) + "','" + giriMiktari + "')");
+            }
+        }
+
+        private void btnKapat_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

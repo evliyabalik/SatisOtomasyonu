@@ -198,6 +198,7 @@ namespace Perakende_Satış_Otomasyonu
             this.btnUrunCikisi.TabIndex = 10;
             this.btnUrunCikisi.Text = "Ürün Çıkışı";
             this.btnUrunCikisi.UseVisualStyleBackColor = true;
+            this.btnUrunCikisi.Click += new System.EventHandler(this.btnUrunCikisi_Click);
             // 
             // btnSatisRaporu
             // 

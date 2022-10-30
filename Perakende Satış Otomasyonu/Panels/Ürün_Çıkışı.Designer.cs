@@ -52,6 +52,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.btnKapat.TabIndex = 29;
             this.btnKapat.Text = "Kapat";
             this.btnKapat.UseVisualStyleBackColor = true;
+            this.btnKapat.Click += new System.EventHandler(this.btnKapat_Click);
             // 
             // btnKaydet
             // 
@@ -63,6 +64,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.btnKaydet.TabIndex = 28;
             this.btnKaydet.Text = "Kaydet";
             this.btnKaydet.UseVisualStyleBackColor = false;
+            this.btnKaydet.Click += new System.EventHandler(this.btnKaydet_Click);
             // 
             // btnUrunSec
             // 
@@ -72,6 +74,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.btnUrunSec.TabIndex = 27;
             this.btnUrunSec.Text = "Ürün Seç";
             this.btnUrunSec.UseVisualStyleBackColor = true;
+            this.btnUrunSec.Click += new System.EventHandler(this.btnUrunSec_Click);
             // 
             // txtCikisMiktari
             // 
@@ -79,6 +82,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.txtCikisMiktari.Name = "txtCikisMiktari";
             this.txtCikisMiktari.Size = new System.Drawing.Size(144, 23);
             this.txtCikisMiktari.TabIndex = 25;
+            this.txtCikisMiktari.TextChanged += new System.EventHandler(this.txtCikisMiktari_TextChanged);
             // 
             // txtUrunAdi
             // 
@@ -105,6 +109,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
             // 
             // cmbTarih
             // 
+            this.cmbTarih.Enabled = false;
             this.cmbTarih.FormattingEnabled = true;
             this.cmbTarih.Location = new System.Drawing.Point(110, 13);
             this.cmbTarih.Name = "cmbTarih";
@@ -184,6 +189,8 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "Ürün_Çıkışı";
             this.Text = "Ürün Çıkışı";
+            this.Activated += new System.EventHandler(this.Ürün_Çıkışı_Activated);
+            this.Load += new System.EventHandler(this.Ürün_Çıkışı_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
