@@ -163,6 +163,7 @@ namespace Perakende_Satış_Otomasyonu
             this.btnUrunGirisi.TabIndex = 9;
             this.btnUrunGirisi.Text = "Ürün Girişi";
             this.btnUrunGirisi.UseVisualStyleBackColor = true;
+            this.btnUrunGirisi.Click += new System.EventHandler(this.btnUrunGirisi_Click);
             // 
             // btnStokRaporu
             // 

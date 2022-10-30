@@ -37,31 +37,7 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
             GetDataCount();
         }
 
-
-        public void AddDataListView(ListView listView)
-        {
-            DatabaseConOpen();
-
-            reader = GetReadData("select * from Urun order by Urun_id Desc");
-
-            if(!reader.IsClosed && reader.HasRows)
-                while (reader.Read())
-                {
-                    ListViewItem item = new ListViewItem();
-                    item.Text = (reader["Urun_barkod"].ToString());
-                    item.SubItems.Add(reader["Urun_grup"].ToString());
-                    item.SubItems.Add(reader["Urun_adi"].ToString());
-                    item.SubItems.Add(reader["Urun_birimi"].ToString());
-                    item.SubItems.Add(reader["Urun_fiyati"].ToString());
-                    listView.Items.Add(item);
-                }
-
-
-
-
-            DatabaseConClose();
-        }
-
+        //Add data to list view
         public void AddDataToListview(string query,string[] dataArray, ListView lstView)
         {
             DatabaseConOpen();
@@ -90,17 +66,7 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
         }
 
 
-        public void AddListView(ListView listView, string urunBarkod, string urunGrup, string urunAdi, string urunBirimi, decimal urunFiyati)
-        {
-            ListViewItem item = new ListViewItem();
-            item.Text = (urunBarkod.ToString());
-            item.SubItems.Add(urunGrup.ToString());
-            item.SubItems.Add(urunAdi.ToString());
-            item.SubItems.Add(urunBirimi.ToString());
-            item.SubItems.Add(urunFiyati.ToString());
-            listView.Items.Add(item);
-        }
-
+        //get data count
         public int GetDataCount(string query)
         {
             DatabaseConOpen();
@@ -121,7 +87,8 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
             DatabaseConClose();
         }
 
-        public void SearchData(ListView listView, string query)
+        //Listview search data
+        public void SearchDataInListView(string query, ListView listView, string[] dataName)
         {
             //Bir sorgu çevirecek
             reader = GetReadData(query);
@@ -131,11 +98,17 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
                 while (reader.Read())
                 {
                     ListViewItem item = new ListViewItem();
-                    item.Text = (reader["Urun_barkod"].ToString());
-                    item.SubItems.Add(reader["Urun_grup"].ToString());
-                    item.SubItems.Add(reader["Urun_adi"].ToString());
-                    item.SubItems.Add(reader["Urun_birimi"].ToString());
-                    item.SubItems.Add(reader["Urun_fiyati"].ToString());
+                    
+                    for (int i = 0; i < listView.Columns.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            item.Text = (reader[dataName[i].ToString()].ToString());
+                            continue;
+                        }
+                        item.SubItems.Add(reader[dataName[i].ToString()].ToString());
+                    }
+
                     listView.Items.Add(item);
                 }
             reader.Close();
@@ -164,8 +137,6 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
             DatabaseConClose();
         }
 
-        public void AddNewUser(string userName, string userPass, string authority) { }
-
         //Delete Data
         public void Delete(string? query)
         {
@@ -178,7 +149,7 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
 
         }
 
-        //Update Product Method
+        //Update Product 
         public void UpdateProduct(string barcode, string group, string productName, string quantityType, int quantity, decimal price, string urunID)
         {
             DatabaseConOpen();
@@ -211,6 +182,7 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
             return getData;
         }
 
+        //ComboBox add items
         public void AddItemCmb(ComboBox cmb, string query, string data)
         {
             DatabaseConOpen();
@@ -228,6 +200,7 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
             }
         }
 
+        //short command executed
         public void ExecuteCommand(string query)
         {
             DatabaseConOpen();
@@ -237,6 +210,8 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
 
         }
 
+        //I don't use now, but one day I'll need it
+        //I was going to use it to add data to datagridview
         public void DataAdapterMethod(DataGridView dgrid, string query)
         {
             DatabaseConOpen();
@@ -251,6 +226,7 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
             DatabaseConClose();
         }
 
+        //is have data
         public bool IsHaveData(string query, string data, string value)
         {
             DatabaseConOpen();
@@ -272,6 +248,8 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
 
 
         //Private Method
+
+        //database close
         private void DatabaseConClose()
         {
             if (this.sql != null)
@@ -284,6 +262,7 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
 
         }
 
+        //Database open
         private void DatabaseConOpen()
         {
             if (this.sql.ConnectionString == null || sql.ConnectionString == "")
@@ -294,7 +273,7 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
         }
 
 
-
+        //comman read data
         private SqlDataReader GetReadData(string query)
         {
             DatabaseConOpen();

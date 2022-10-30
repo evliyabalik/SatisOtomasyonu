@@ -14,6 +14,8 @@ namespace Perakende_Satış_Otomasyonu.Panels
     public partial class Ürün_Kartları_Arama : Form
     {
         Database data = new Database();
+        string[] dataName = { "Urun_barkod", "Urun_grup", "Urun_adi", "Urun_birimi", "Urun_fiyati" };
+
 
         public Ürün_Kartları_Arama()
         {
@@ -46,9 +48,10 @@ namespace Perakende_Satış_Otomasyonu.Panels
             lstSearchList.Items.Clear();
 
             if (rdbUrunAdi.Checked)
-                data.SearchData(lstSearchList, "select * from Urun where Urun_adi like '" + txtUrunAdi.Text + "'");
+                data.SearchDataInListView("select * from Urun where Urun_adi like '" + txtUrunAdi.Text + "'", lstSearchList, dataName);
             else if (rdbBarkod.Checked)
-                data.SearchData(lstSearchList, "select * from Urun where Urun_barkod like '" + txtUrunAdi.Text + "'");
+                data.SearchDataInListView("select * from Urun where Urun_barkod like '" + txtUrunAdi.Text + "'", lstSearchList, dataName);
+                //data.SearchData(lstSearchList, "select * from Urun where Urun_barkod like '" + txtUrunAdi.Text + "'");
 
             
 
@@ -58,7 +61,8 @@ namespace Perakende_Satış_Otomasyonu.Panels
         {
             if(!rdbBarkod.Checked && !rdbUrunAdi.Checked)
                 rdbUrunAdi.Checked = true;
-            data.AddDataListView(lstSearchList);
+
+            data.AddDataToListview("select * from Urun order by Urun_id Desc", dataName, lstSearchList);
         }
 
         private void lstSearchList_SelectedIndexChanged(object sender, EventArgs e)

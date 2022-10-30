@@ -108,11 +108,13 @@ namespace Perakende_Satış_Otomasyonu.Panels
             // 
             // cmbTarih
             // 
+            this.cmbTarih.Enabled = false;
             this.cmbTarih.FormattingEnabled = true;
             this.cmbTarih.Location = new System.Drawing.Point(112, 12);
             this.cmbTarih.Name = "cmbTarih";
             this.cmbTarih.Size = new System.Drawing.Size(133, 23);
             this.cmbTarih.TabIndex = 6;
+            this.cmbTarih.SelectedIndexChanged += new System.EventHandler(this.cmbTarih_SelectedIndexChanged);
             // 
             // rtbAciklama
             // 
@@ -150,6 +152,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.txtGirisMiktari.Name = "txtGirisMiktari";
             this.txtGirisMiktari.Size = new System.Drawing.Size(147, 23);
             this.txtGirisMiktari.TabIndex = 11;
+            this.txtGirisMiktari.TextChanged += new System.EventHandler(this.txtGirisMiktari_TextChanged);
             // 
             // btnUrunSec
             // 
@@ -159,6 +162,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.btnUrunSec.TabIndex = 12;
             this.btnUrunSec.Text = "Ürün Seç";
             this.btnUrunSec.UseVisualStyleBackColor = true;
+            this.btnUrunSec.Click += new System.EventHandler(this.btnUrunSec_Click);
             // 
             // btnKaydet
             // 
@@ -205,6 +209,9 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "Ürün_Girişi";
             this.Text = "Ürün Girişi";
+            this.Activated += new System.EventHandler(this.Ürün_Girişi_Activated);
+            this.Load += new System.EventHandler(this.Ürün_Girişi_Load);
+            this.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.Ürün_Girişi_ControlAdded);
             this.ResumeLayout(false);
             this.PerformLayout();
 

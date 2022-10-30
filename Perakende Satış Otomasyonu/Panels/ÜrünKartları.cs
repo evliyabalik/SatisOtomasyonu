@@ -15,14 +15,16 @@ namespace Perakende_Satış_Otomasyonu.Panels
     {
         Database data = new Database();
         int count;
+        string[] dataName = { "Urun_barkod", "Urun_grup", "Urun_adi", "Urun_birimi", "Urun_fiyati" };
 
         public ÜrünKartları()
         {
             InitializeComponent();
             count= data.GetDataCount("select count(*) from Urun");
-            
 
-            data.AddDataListView(lstUrunKartlari);
+
+            //data.AddDataListView(lstUrunKartlari);
+            data.AddDataToListview("select * from Urun order by Urun_id Desc", dataName, lstUrunKartlari);
 
 
             if (Database.selectValueId != null)
@@ -43,15 +45,14 @@ namespace Perakende_Satış_Otomasyonu.Panels
                 if (data.IsHaveData("Select * from Urun","Urun_barkod",txtBarkod.Text) && data.IsHaveData("Select * from Urun", "Urun_adi", txtUrunAdi.Text)) 
                 {
                     data.AddNewProduct(txtBarkod.Text, cmbGrup.Text, txtUrunAdi.Text, cmbBirim.Text, Int32.Parse(txtKritikSeviye.Text), Decimal.Parse(txtBirimFiyati.Text));
-                    //data.AddListView(lstUrunKartlari, txtBarkod.Text, cmbGrup.Text, txtUrunAdi.Text, cmbBirim.Text, Decimal.Parse(txtBirimFiyati.Text));
                     lstUrunKartlari.Items.Clear();
-                    data.AddDataListView(lstUrunKartlari);
+                    data.AddDataToListview("select * from Urun order by Urun_id Desc", dataName, lstUrunKartlari);
                 }
                 else
                 {
                     data.UpdateProduct(txtBarkod.Text,cmbGrup.Text,txtUrunAdi.Text,cmbBirim.Text,Int32.Parse(txtKritikSeviye.Text), decimal.Parse(txtBirimFiyati.Text), Database.selectValueId);
                     lstUrunKartlari.Items.Clear();
-                    data.AddDataListView(lstUrunKartlari);
+                    data.AddDataToListview("select * from Urun order by Urun_id Desc", dataName, lstUrunKartlari);
                 }
             }
             catch (Exception ex)
@@ -95,7 +96,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
                 data.Delete("Delete from Urun where Urun_id=" + Database.selectValueId);
 
                 lstUrunKartlari.Items.Clear();
-                data.AddDataListView(lstUrunKartlari);
+                data.AddDataToListview("select * from Urun order by Urun_id Desc", dataName, lstUrunKartlari);
             }
         }
 
