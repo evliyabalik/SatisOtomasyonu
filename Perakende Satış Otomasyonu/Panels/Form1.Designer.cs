@@ -374,6 +374,7 @@ namespace Perakende_Satış_Otomasyonu
             this.kullanıcıHesaplarıToolStripMenuItem.Name = "kullanıcıHesaplarıToolStripMenuItem";
             this.kullanıcıHesaplarıToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.kullanıcıHesaplarıToolStripMenuItem.Text = "Kullanıcı Hesapları";
+            this.kullanıcıHesaplarıToolStripMenuItem.Click += new System.EventHandler(this.kullanıcıHesaplarıToolStripMenuItem_Click);
             // 
             // şifrelemeToolStripMenuItem
             // 
