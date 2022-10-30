@@ -31,6 +31,7 @@ namespace Perakende_Satış_Otomasyonu
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.ButtonPannel = new System.Windows.Forms.Panel();
             this.btnHareketRaporu = new System.Windows.Forms.Button();
             this.btnQuit = new System.Windows.Forms.Button();
@@ -67,6 +68,7 @@ namespace Perakende_Satış_Otomasyonu
             this.programHakkındaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.programıKapatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1.SuspendLayout();
             this.ButtonPannel.SuspendLayout();
             this.BompNamePannel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -78,13 +80,25 @@ namespace Perakende_Satış_Otomasyonu
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.Peru;
-            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Location = new System.Drawing.Point(128, 58);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(806, 663);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
+            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(803, 660);
+            this.panel2.TabIndex = 0;
             // 
             // ButtonPannel
             // 
@@ -374,6 +388,7 @@ namespace Perakende_Satış_Otomasyonu
             this.kullanıcıHesaplarıToolStripMenuItem.Name = "kullanıcıHesaplarıToolStripMenuItem";
             this.kullanıcıHesaplarıToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.kullanıcıHesaplarıToolStripMenuItem.Text = "Kullanıcı Hesapları";
+            this.kullanıcıHesaplarıToolStripMenuItem.Click += new System.EventHandler(this.kullanıcıHesaplarıToolStripMenuItem_Click);
             // 
             // şifrelemeToolStripMenuItem
             // 
@@ -417,6 +432,7 @@ namespace Perakende_Satış_Otomasyonu
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Ödev-Perakende Satış Otomasyonu";
+            this.panel1.ResumeLayout(false);
             this.ButtonPannel.ResumeLayout(false);
             this.BompNamePannel.ResumeLayout(false);
             this.BompNamePannel.PerformLayout();
@@ -466,6 +482,7 @@ namespace Perakende_Satış_Otomasyonu
         private System.Windows.Forms.ToolStripMenuItem programHakkındaToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem programıKapatToolStripMenuItem;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 

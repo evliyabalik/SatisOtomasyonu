@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Remove="Form1.resx" />
     <EmbeddedResource Remove="Panels\Form1.resx" />
   </ItemGroup>
 

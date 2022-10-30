@@ -14,12 +14,12 @@ namespace Perakende_Satış_Otomasyonu
 {
     public partial class MainForm : Form
     {
-       
+
         public MainForm()
         {
             InitializeComponent();
             Firma_Bilgileri firmaBilgileri = new Firma_Bilgileri();
-            
+
 
             Database data = new Database();
             lblCompanyName.Text = data.GetData("select * from Firma_Bilgileri", "Firma_adi");
@@ -29,7 +29,7 @@ namespace Perakende_Satış_Otomasyonu
             else
                 return;
 
-            
+
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -49,13 +49,19 @@ namespace Perakende_Satış_Otomasyonu
 
         private void btnSatisMenusu_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnUrunKartlari_Click(object sender, EventArgs e)
         {
             ÜrünKartları urunKartlari = new ÜrünKartları();
             urunKartlari.Show();
+        }
+
+        private void kullanıcıHesaplarıToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Kisi_Ekle kisi = new Kisi_Ekle();
+            kisi.Show();
         }
     }
 }
