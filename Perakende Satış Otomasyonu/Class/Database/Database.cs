@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Data;
+using System.Collections;
 
 namespace Perakende_Satış_Otomasyonu.Class.Database
 {
@@ -34,7 +35,7 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
             if (this.sql.State == System.Data.ConnectionState.Closed)
                 this.sql.Open();
 
-            GetDataCount();
+            //GetDataCounti();
         }
 
         //Add data to list view
@@ -114,58 +115,70 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
             reader.Close();
         }
 
-
-
         //Add New Product
-        public void AddNewProduct(string barcode, string group, string productName, string quantityType, int quantity, decimal price)
+        //public void AddNewProduct(string barcode, string group, string productName, string quantityType, int quantity, decimal price)
+        //{
+        //    string query = "insert into Urun (Urun_barkod, Urun_grup, Urun_adi, Urun_birimi, Urun_miktari, Urun_fiyati) values (@barcode, @group, @productName, @quantityType, @quantity, @price)";
+
+
+        //    DatabaseConOpen();
+        //    SqlCommand command = new SqlCommand(query, sql);
+
+        //    command.Parameters.AddWithValue("@barcode", barcode);
+        //    command.Parameters.AddWithValue("@group", group);
+        //    command.Parameters.AddWithValue("@productName", productName);
+        //    command.Parameters.AddWithValue("@quantityType", quantityType);
+        //    command.Parameters.AddWithValue("@quantity", quantity);
+        //    command.Parameters.AddWithValue("@price", price);
+
+        //    command.ExecuteNonQuery();
+
+        //    DatabaseConClose();
+        //}
+
+        public void SqlInsertData(string[] data, ArrayList values, string tableName)
         {
-            string query = "insert into Urun (Urun_barkod, Urun_grup, Urun_adi, Urun_birimi, Urun_miktari, Urun_fiyati) values (@barcode, @group, @productName, @quantityType, @quantity, @price)";
-
-
             DatabaseConOpen();
-            SqlCommand command = new SqlCommand(query, sql);
-
-            command.Parameters.AddWithValue("@barcode", barcode);
-            command.Parameters.AddWithValue("@group", group);
-            command.Parameters.AddWithValue("@productName", productName);
-            command.Parameters.AddWithValue("@quantityType", quantityType);
-            command.Parameters.AddWithValue("@quantity", quantity);
-            command.Parameters.AddWithValue("@price", price);
-
+            for (int i = 0; i < data.Length; i++)
+            {
+                command = new SqlCommand("Insert into "+tableName+" (" + data[i].ToString() + ") values ('" + values[i].ToString() + "')", sql);
+            }
             command.ExecuteNonQuery();
-
             DatabaseConClose();
         }
 
-        //Delete Data
-        public void Delete(string? query)
-        {
-            DatabaseConOpen();
-
-            command = new SqlCommand(query, sql);
-            command.ExecuteNonQuery();
-
-            DatabaseConClose();
-
-        }
+        
 
         //Update Product 
-        public void UpdateProduct(string barcode, string group, string productName, string quantityType, int quantity, decimal price, string urunID)
+        //public void UpdateProduct(string barcode, string group, string productName, string quantityType, int quantity, decimal price, string urunID)
+        //{
+        //    DatabaseConOpen();
+        //    string query = "update Urun set Urun_barkod=@barcode, Urun_grup=@group, Urun_adi=@productName, Urun_birimi= @quantityType, Urun_miktari=@quantity, Urun_fiyati=@price where Urun_id=@urunID";
+        //    command = new SqlCommand(query, sql);
+
+        //    command.Parameters.AddWithValue("@urunID", urunID);
+        //    command.Parameters.AddWithValue("@barcode", barcode);
+        //    command.Parameters.AddWithValue("@group", group);
+        //    command.Parameters.AddWithValue("@productName", productName);
+        //    command.Parameters.AddWithValue("@quantityType", quantityType);
+        //    command.Parameters.AddWithValue("@quantity", quantity.ToString());
+        //    command.Parameters.AddWithValue("@price", price.ToString());
+
+        //    command.ExecuteNonQuery();
+        //    DatabaseConClose();
+        //}
+
+        public void SqlUpdateData(string[] data, ArrayList value, string id, string whichCondition, string tableName)
         {
             DatabaseConOpen();
-            string query = "update Urun set Urun_barkod=@barcode, Urun_grup=@group, Urun_adi=@productName, Urun_birimi= @quantityType, Urun_miktari=@quantity, Urun_fiyati=@price where Urun_id=@urunID";
-            command = new SqlCommand(query, sql);
 
-            command.Parameters.AddWithValue("@urunID", urunID);
-            command.Parameters.AddWithValue("@barcode", barcode);
-            command.Parameters.AddWithValue("@group", group);
-            command.Parameters.AddWithValue("@productName", productName);
-            command.Parameters.AddWithValue("@quantityType", quantityType);
-            command.Parameters.AddWithValue("@quantity", quantity.ToString());
-            command.Parameters.AddWithValue("@price", price.ToString());
+            for (int i = 0; i < data.Length; i++)
+            {
 
-            command.ExecuteNonQuery();
-            reader.Close();
+                command = new SqlCommand("update " + tableName + " set " + data[i] + "='" + value[i] + "' where " + whichCondition + "=" + id, sql);
+                command.ExecuteNonQuery();
+            }
+
             DatabaseConClose();
         }
 
@@ -210,21 +223,6 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
 
         }
 
-        //I don't use now, but one day I'll need it
-        //I was going to use it to add data to datagridview
-        public void DataAdapterMethod(DataGridView dgrid, string query)
-        {
-            DatabaseConOpen();
-            using (SqlDataAdapter dataAdapter=new SqlDataAdapter(query, sql))
-            {
-                using (DataSet ds=new DataSet())
-                {
-                    dataAdapter.Fill(ds);
-                    dgrid.DataSource = ds.Tables[0];
-                }
-            }
-            DatabaseConClose();
-        }
 
         //is have data
         public bool IsHaveData(string query, string data, string value)
@@ -284,11 +282,11 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
         }
 
         //Data Count 
-        private void GetDataCount()
+        private void GetDataCounti(string query)
         {
             DatabaseConOpen();
 
-            command = new SqlCommand("select Firma_id from Firma_Bilgileri", sql);
+            command = new SqlCommand(query, sql);
             _dataCound = Convert.ToInt32(command.ExecuteScalar());
 
             DatabaseConClose();

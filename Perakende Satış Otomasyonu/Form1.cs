@@ -14,6 +14,7 @@ namespace Perakende_Satış_Otomasyonu
 {
     public partial class MainForm : Form
     {
+        Database data = new Database();
 
         public MainForm()
         {
@@ -21,10 +22,11 @@ namespace Perakende_Satış_Otomasyonu
             Firma_Bilgileri firmaBilgileri = new Firma_Bilgileri();
 
 
-            Database data = new Database();
-            lblCompanyName.Text = data.GetData("select * from Firma_Bilgileri", "Firma_adi");
+            
+            if(data.GetDataCount("select Firma_id from Firma_Bilgileri")>0)
+                lblCompanyName.Text = data.GetData("select * from Firma_Bilgileri", "Firma_adi");
 
-            if (data.DataCount == 0)
+            if (data.GetDataCount("select Firma_id from Firma_Bilgileri") == 0)
                 firmaBilgileri.Show();
             else
                 return;
@@ -74,6 +76,12 @@ namespace Perakende_Satış_Otomasyonu
         {
             Ürün_Çıkışı cikisUrun = new Ürün_Çıkışı();
             cikisUrun.Show();
+        }
+
+        private void MainForm_Activated(object sender, EventArgs e)
+        {
+            if (data.GetDataCount("select Firma_id from Firma_Bilgileri") > 0)
+                lblCompanyName.Text = data.GetData("select * from Firma_Bilgileri", "Firma_adi");
         }
     }
 }

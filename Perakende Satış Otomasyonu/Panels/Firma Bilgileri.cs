@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,9 +30,15 @@ namespace Perakende_Satış_Otomasyonu.Panels
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
+            string[] companyData = { "Firma_adi, Firma_yetkilisi, Firma_adres, Firma_il, Firma_ilçe, Firma_telefon, Firma_fax, Firma_email, Firma_web_adresi, Firma_vergi_dairesi, Firma_vergi_numarası" };
+            ArrayList companyDataValues = new ArrayList() { txtFirmaİsmi.Text + "','" + txtFirmaYetkilisi.Text + "','" + txtAdres.Text + "','" + txtİl.Text + "','" +txtİlçe.Text +"','" + txtTelefon.Text + "','" + txtFax.Text+ "','"+ txtEmail.Text+ "','"+ txtWeb.Text + "','" + txtVergiDairesi.Text + "','" + txtVergiNo.Text };
+
             try
             {
-                data.AddCompanyInformation(txtFirmaİsmi.Text.ToString(), txtFirmaYetkilisi.Text.ToString(), txtAdres.Text.ToString(), txtİl.Text.ToString(), txtİlçe.Text.ToString(), txtTelefon.Text.ToString(), txtFax.Text.ToString(), txtEmail.Text.ToString(), txtWeb.Text.ToString(), txtVergiDairesi.Text.ToString(), txtVergiNo.Text.ToString());
+                //data.AddCompanyInformation(txtFirmaİsmi.Text.ToString(), txtFirmaYetkilisi.Text.ToString(), txtAdres.Text.ToString(), txtİl.Text.ToString(), txtİlçe.Text.ToString(), txtTelefon.Text.ToString(), txtFax.Text.ToString(), txtEmail.Text.ToString(), txtWeb.Text.ToString(), txtVergiDairesi.Text.ToString(), txtVergiNo.Text.ToString());
+                data.SqlInsertData(companyData, companyDataValues, "Firma_Bilgileri");
+                companyData = null;
+                companyDataValues = null;
                 this.Hide();
             }
             catch (Exception)

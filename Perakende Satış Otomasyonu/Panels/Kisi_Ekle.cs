@@ -1,5 +1,6 @@
 ﻿using Perakende_Satış_Otomasyonu.Class.Database;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -36,6 +37,11 @@ namespace Perakende_Satış_Otomasyonu.Panels
         
         private void btnKaydet_Click_1(object sender, EventArgs e)
         {
+            ArrayList userDataValues = new ArrayList() { txtAdi.Text + "','" + txtSoyadi.Text + "','" + txtKullaniciAdi.Text + "','" + txtSifre.Text + "','" + txtEmail.Text + "','" + txtCep.Text + "','" + cmbPosition.Text + "','" + cmbYetki.Text };
+            string[] userData = { "User_name, User_surname, User_nickname, User_password, User_email, User_tel, User_position, User_authority" };
+            
+
+
             try
             {
                 if (txtAdi.Text != "" && txtSoyadi.Text != "" && txtKullaniciAdi.Text != "" && txtSifre.Text != "" && txtSifreTekrar.Text != "" && txtEmail.Text != "" && txtCep.Text != "")
@@ -46,7 +52,8 @@ namespace Perakende_Satış_Otomasyonu.Panels
                         MessageBox.Show("Kullanıcı Zaten Mevcut!", "Dikkat");
                     else
                     {
-                        data.ExecuteCommand("Insert into Users (User_name, User_surname, User_nickname, User_password, User_email, User_tel, User_position, User_authority) values ('" + txtAdi.Text + "','" + txtSoyadi.Text + "','" + txtKullaniciAdi.Text + "','" + txtSifre.Text + "','" + txtEmail.Text + "','" + txtCep.Text + "','" + cmbPosition.Text + "','" + cmbYetki.Text + "')");
+                        //data.ExecuteCommand("Insert into Users (User_name, User_surname, User_nickname, User_password, User_email, User_tel, User_position, User_authority) values ('" + txtAdi.Text + "','" + txtSoyadi.Text + "','" + txtKullaniciAdi.Text + "','" + txtSifre.Text + "','" + txtEmail.Text + "','" + txtCep.Text + "','" + cmbPosition.Text + "','" + cmbYetki.Text + "')");
+                        data.SqlInsertData(userData, userDataValues, "Users");
                         MessageBox.Show("Kullanıcı Eklendi.", "Info");
                         lstUsers.Items.Clear();
                         data.AddDataToListview("select * from Users", dataName, lstUsers);
@@ -54,6 +61,9 @@ namespace Perakende_Satış_Otomasyonu.Panels
                 }
                 else
                     MessageBox.Show("Lütfen Tüm Alanları Doldurun!", "Dikkat");
+
+                userData = null;
+                userDataValues = null;
 
             }
             catch (Exception)

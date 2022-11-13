@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +18,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
         int count;
         string[] dataName = { "Urun_barkod", "Urun_grup", "Urun_adi", "Urun_birimi", "Urun_fiyati" };
 
+
         public ÜrünKartları()
         {
             InitializeComponent();
@@ -30,6 +32,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
             if (Database.selectValueId != null)
                 GetDataInListView();
 
+
         }
 
         private void label7_Click(object sender, EventArgs e)
@@ -40,20 +43,33 @@ namespace Perakende_Satış_Otomasyonu.Panels
         
         private void btnKaydet_Click(object sender, EventArgs e)
         {
+            //For Insert command of Array
+            string[] productData = { "Urun_barkod, Urun_grup, Urun_adi, Urun_birimi, Urun_miktari, Urun_fiyati" };
+            ArrayList productDataValues=new ArrayList() { txtBarkod.Text+"','"+ cmbGrup.Text + "','" + txtUrunAdi.Text + "','" + cmbBirim.Text + "','" + Int32.Parse(txtKritikSeviye.Text) + "','" + decimal.Parse(txtBirimFiyati.Text) };
+
+            //For Update command of Array
+            string[] productDataU = { "Urun_barkod"," Urun_grup", " Urun_adi", " Urun_birimi", " Urun_miktari", " Urun_fiyati" };
+            ArrayList productDataValuesU = new ArrayList() { txtBarkod.Text ,  cmbGrup.Text ,  txtUrunAdi.Text, cmbBirim.Text, Int32.Parse(txtKritikSeviye.Text), decimal.Parse(txtBirimFiyati.Text) };
+
             try
             {
                 if (data.IsHaveData("Select * from Urun","Urun_barkod",txtBarkod.Text) && data.IsHaveData("Select * from Urun", "Urun_adi", txtUrunAdi.Text)) 
                 {
-                    data.AddNewProduct(txtBarkod.Text, cmbGrup.Text, txtUrunAdi.Text, cmbBirim.Text, Int32.Parse(txtKritikSeviye.Text), Decimal.Parse(txtBirimFiyati.Text));
+                    
+                    data.SqlInsertData(productData, productDataValues, "Urun");
                     lstUrunKartlari.Items.Clear();
                     data.AddDataToListview("select * from Urun order by Urun_id Desc", dataName, lstUrunKartlari);
                 }
                 else
                 {
-                    data.UpdateProduct(txtBarkod.Text,cmbGrup.Text,txtUrunAdi.Text,cmbBirim.Text,Int32.Parse(txtKritikSeviye.Text), decimal.Parse(txtBirimFiyati.Text), Database.selectValueId);
+                    data.SqlUpdateData(productDataU, productDataValuesU, Database.selectValueId, "Urun_id", "Urun");
                     lstUrunKartlari.Items.Clear();
                     data.AddDataToListview("select * from Urun order by Urun_id Desc", dataName, lstUrunKartlari);
                 }
+                productData = null;
+                productDataU = null;
+                productDataValues = null;
+                productDataValuesU = null;
             }
             catch (Exception ex)
             {
@@ -94,7 +110,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
 
             if (Database.selectValueId != null)
             {
-                data.Delete("Delete from Urun where Urun_id=" + Database.selectValueId);
+                data.ExecuteCommand("Delete from Urun where Urun_id=" + Database.selectValueId);
 
                 lstUrunKartlari.Items.Clear();
                 data.AddDataToListview("select * from Urun order by Urun_id Desc", dataName, lstUrunKartlari);
@@ -102,12 +118,12 @@ namespace Perakende_Satış_Otomasyonu.Panels
 
             if (!data.IsHaveData("Select * from Urun_cikis", "Urun_cikis_id", Database.selectValueId))
             {
-                data.Delete("Delete from Urun_cikis where Urun_cikis_id=" + Database.selectValueId);
+                data.ExecuteCommand("Delete from Urun_cikis where Urun_cikis_id=" + Database.selectValueId);
             }
 
             if (!data.IsHaveData("Select * from Urun_giris", "Urun_giris_id", Database.selectValueId))
             {
-                data.Delete("Delete from Urun_giris where Urun_giris_id=" + Database.selectValueId);
+                data.ExecuteCommand("Delete from Urun_giris where Urun_giris_id=" + Database.selectValueId);
             }
         }
 

@@ -434,6 +434,7 @@ namespace Perakende_Satış_Otomasyonu
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Ödev-Perakende Satış Otomasyonu";
+            this.Activated += new System.EventHandler(this.MainForm_Activated);
             this.panel1.ResumeLayout(false);
             this.ButtonPannel.ResumeLayout(false);
             this.BompNamePannel.ResumeLayout(false);
