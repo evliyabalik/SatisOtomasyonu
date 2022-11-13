@@ -16,12 +16,16 @@ namespace Perakende_Satış_Otomasyonu
     {
         Database data = new Database();
 
+        Ürün_Girişi urunGiris;
+        ÜrünKartları urunKartlari;
+        Ürün_Çıkışı cikisUrun;
+
         public MainForm()
         {
             InitializeComponent();
             Firma_Bilgileri firmaBilgileri = new Firma_Bilgileri();
-
-
+            urunGiris = new Ürün_Girişi();
+            cikisUrun = new Ürün_Çıkışı();
             
             if(data.GetDataCount("select Firma_id from Firma_Bilgileri")>0)
                 lblCompanyName.Text = data.GetData("select * from Firma_Bilgileri", "Firma_adi");
@@ -56,7 +60,7 @@ namespace Perakende_Satış_Otomasyonu
 
         private void btnUrunKartlari_Click(object sender, EventArgs e)
         {
-            ÜrünKartları urunKartlari = new ÜrünKartları();
+            urunKartlari = new ÜrünKartları();
             urunKartlari.Show();
         }
 
@@ -68,13 +72,13 @@ namespace Perakende_Satış_Otomasyonu
 
         private void btnUrunGirisi_Click(object sender, EventArgs e)
         {
-            Ürün_Girişi urunGiris = new Ürün_Girişi();
+            
             urunGiris.Show();
         }
 
         private void btnUrunCikisi_Click(object sender, EventArgs e)
         {
-            Ürün_Çıkışı cikisUrun = new Ürün_Çıkışı();
+            
             cikisUrun.Show();
         }
 
@@ -82,6 +86,23 @@ namespace Perakende_Satış_Otomasyonu
         {
             if (data.GetDataCount("select Firma_id from Firma_Bilgileri") > 0)
                 lblCompanyName.Text = data.GetData("select * from Firma_Bilgileri", "Firma_adi");
+        }
+
+        private void ürünKartlarıToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            urunKartlari = new ÜrünKartları();
+            urunKartlari.Show();
+        }
+
+        private void ürünGirişiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            urunGiris.Show();
+        }
+
+        private void ürünÇıkışıToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cikisUrun.Show();
+            
         }
     }
 }
