@@ -360,7 +360,7 @@ namespace Perakende_Satış_Otomasyonu.Forms
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label7.ForeColor = System.Drawing.Color.Lime;
-            this.label7.Location = new System.Drawing.Point(112, 14);
+            this.label7.Location = new System.Drawing.Point(113, 14);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(68, 15);
             this.label7.TabIndex = 14;
@@ -393,7 +393,7 @@ namespace Perakende_Satış_Otomasyonu.Forms
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label10.ForeColor = System.Drawing.Color.Lime;
-            this.label10.Location = new System.Drawing.Point(430, 14);
+            this.label10.Location = new System.Drawing.Point(431, 14);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(118, 15);
             this.label10.TabIndex = 17;
