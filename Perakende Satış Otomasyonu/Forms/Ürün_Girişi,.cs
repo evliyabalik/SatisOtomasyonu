@@ -1,5 +1,6 @@
 ﻿using Perakende_Satış_Otomasyonu.Class.Database;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -40,17 +41,10 @@ namespace Perakende_Satış_Otomasyonu.Panels
         private void Ürün_Girişi_Activated(object sender, EventArgs e)
         {
             if (Database.selectValueId != null)
-                GetDataInListView(Database.selectValueId);
+                data.GetDataforBox("select * from Urun where Urun_id like '", Database.selectValueId, new string[] { "Urun_barkod", "Urun_adi" }, txtBarkod, txtUrunAdi);
         }
 
-        private void GetDataInListView(string valueId)
-        {
-            if (Database.selectValueId != null)
-            {
-                txtBarkod.Text = data.GetData("select * from Urun where Urun_id like '" + valueId + "' ", "Urun_barkod");
-                txtUrunAdi.Text = data.GetData("select * from Urun where Urun_id like '" + valueId + "' ", "Urun_adi");
-            }
-        }
+        
 
         private void Ürün_Girişi_ControlAdded(object sender, ControlEventArgs e)
         {
@@ -68,22 +62,33 @@ namespace Perakende_Satış_Otomasyonu.Panels
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            if (Database.selectValueId != null)
+            string[] dataArray = { "Urun_giris_id, Urun_giris_tarih, Urun_giris_aciklama, Urun_giris_barkod, Urun_giris_adi, Urun_giris_fiyati, Urun_giris_miktari" };
+            ArrayList valuesArray = new ArrayList() { Database.selectValueId + "','" + cmbTarih.Text + "','" + rtbAciklama.Text + "','" + txtBarkod.Text + "','" + txtUrunAdi.Text + "','" + float.Parse(txtGirisFiyati.Text) + "','" + Int32.Parse(txtGirisMiktari.Text) };
+
+            try
+            {
+                DialogResult toDecide = MessageBox.Show(txtUrunAdi.Text + " ürününden " + txtGirisMiktari.Text + " adet giriş yapılacak onaylıyor musunuz?", "Bilgilendirme", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if(toDecide==DialogResult.OK)
+                    if (Database.selectValueId != null)
+                    {
+                        data.SqlInsertData(dataArray, valuesArray, "Urun_giris");
+                        MessageBox.Show("Ürün girişi başarıyla eklendi.", "Bilgilendirme");
+                    }
+                if(toDecide==DialogResult.Cancel)
+                    MessageBox.Show("Ürün Girişi Yapılmadı","Bilgilendirme"); 
+            }
+            catch (Exception error)
             {
 
-                string urun_id = Database.selectValueId;
-                string tarih = cmbTarih.Text;
-                string aciklama = rtbAciklama.Text;
-                
-
-                txtBarkod.Text = data.GetData("select * from Urun where Urun_id like '" + Database.selectValueId + "' ", "Urun_barkod");
-                txtUrunAdi.Text = data.GetData("select * from Urun where Urun_id like '" + Database.selectValueId + "' ", "Urun_adi");
-
-                int girisFiyati = Int32.Parse(txtGirisFiyati.Text);
-                int giriMiktari = Int32.Parse(txtGirisMiktari.Text);
-
-                data.ExecuteCommand("insert into Urun_giris (Urun_giris_id, Urun_giris_tarih, Urun_giris_aciklama, Urun_giris_barkod, Urun_giris_adi, Urun_giris_fiyati, Urun_giris_miktari) values ('" + urun_id + "','" + tarih + "','" + aciklama + "','" + txtBarkod.Text + "','" + txtUrunAdi.Text + "','" + decimal.Parse(girisFiyati.ToString()) + "','" + giriMiktari + "')");
+                MessageBox.Show("Hata Ürün eklenmedi. "+error,"Hata", MessageBoxButtons.OK ,MessageBoxIcon.Error);
             }
+            finally
+            {
+                dataArray = null;
+                valuesArray = null;
+            }
+
+           
         }
 
         private void btnKapat_Click(object sender, EventArgs e)

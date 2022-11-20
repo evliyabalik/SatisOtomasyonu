@@ -35,7 +35,6 @@ namespace Perakende_Satış_Otomasyonu.Panels
 
             try
             {
-                //data.AddCompanyInformation(txtFirmaİsmi.Text.ToString(), txtFirmaYetkilisi.Text.ToString(), txtAdres.Text.ToString(), txtİl.Text.ToString(), txtİlçe.Text.ToString(), txtTelefon.Text.ToString(), txtFax.Text.ToString(), txtEmail.Text.ToString(), txtWeb.Text.ToString(), txtVergiDairesi.Text.ToString(), txtVergiNo.Text.ToString());
                 data.SqlInsertData(companyData, companyDataValues, "Firma_Bilgileri");
                 companyData = null;
                 companyDataValues = null;
@@ -43,8 +42,12 @@ namespace Perakende_Satış_Otomasyonu.Panels
             }
             catch (Exception)
             {
-
                 MessageBox.Show("Hata! Firma eklenemedi.");
+            }
+            finally
+            {
+                companyData = null;
+                companyDataValues = null;
             }
 
         }

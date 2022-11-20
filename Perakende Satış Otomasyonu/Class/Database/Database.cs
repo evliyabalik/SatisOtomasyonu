@@ -17,7 +17,7 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
 
         private SqlConnection sql = new SqlConnection();
 
-        public int DataCount { get { return _dataCound; } }
+        public int DataCount { get { return _dataCound; } set { _dataCound = value; } }
         public static string nData;
         public static string selectValueId;
 
@@ -35,7 +35,6 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
             if (this.sql.State == System.Data.ConnectionState.Closed)
                 this.sql.Open();
 
-            //GetDataCounti();
         }
 
         //Add data to list view
@@ -77,17 +76,6 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
             return executeScalar;
         }
 
-
-
-        // Add new Company
-        public void AddCompanyInformation(string compName, string compBoss, string address, string city, string district, string tel, string fax, string email, string webAddress, string taxAdministration, string taxNum)
-        {
-            DatabaseConOpen();
-            command = new SqlCommand("INSERT INTO Firma_Bilgileri (Firma_adi, Firma_yetkilisi, Firma_adres, Firma_il, Firma_ilçe, Firma_telefon, Firma_fax, Firma_email, Firma_web_adresi, Firma_vergi_dairesi, Firma_vergi_numarası) values ('" + compName + "','" + compBoss + "','" + address + "','" + city + "','" + district + "','" + tel + "','" + fax + "','" + email + "','" + webAddress + "','" + taxAdministration + "','" + taxNum + "')", sql);
-            command.ExecuteNonQuery();
-            DatabaseConClose();
-        }
-
         //Listview search data
         public void SearchDataInListView(string query, ListView listView, string[] dataName)
         {
@@ -115,27 +103,6 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
             reader.Close();
         }
 
-        //Add New Product
-        //public void AddNewProduct(string barcode, string group, string productName, string quantityType, int quantity, decimal price)
-        //{
-        //    string query = "insert into Urun (Urun_barkod, Urun_grup, Urun_adi, Urun_birimi, Urun_miktari, Urun_fiyati) values (@barcode, @group, @productName, @quantityType, @quantity, @price)";
-
-
-        //    DatabaseConOpen();
-        //    SqlCommand command = new SqlCommand(query, sql);
-
-        //    command.Parameters.AddWithValue("@barcode", barcode);
-        //    command.Parameters.AddWithValue("@group", group);
-        //    command.Parameters.AddWithValue("@productName", productName);
-        //    command.Parameters.AddWithValue("@quantityType", quantityType);
-        //    command.Parameters.AddWithValue("@quantity", quantity);
-        //    command.Parameters.AddWithValue("@price", price);
-
-        //    command.ExecuteNonQuery();
-
-        //    DatabaseConClose();
-        //}
-
         public void SqlInsertData(string[] data, ArrayList values, string tableName)
         {
             DatabaseConOpen();
@@ -148,26 +115,6 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
         }
 
         
-
-        //Update Product 
-        //public void UpdateProduct(string barcode, string group, string productName, string quantityType, int quantity, decimal price, string urunID)
-        //{
-        //    DatabaseConOpen();
-        //    string query = "update Urun set Urun_barkod=@barcode, Urun_grup=@group, Urun_adi=@productName, Urun_birimi= @quantityType, Urun_miktari=@quantity, Urun_fiyati=@price where Urun_id=@urunID";
-        //    command = new SqlCommand(query, sql);
-
-        //    command.Parameters.AddWithValue("@urunID", urunID);
-        //    command.Parameters.AddWithValue("@barcode", barcode);
-        //    command.Parameters.AddWithValue("@group", group);
-        //    command.Parameters.AddWithValue("@productName", productName);
-        //    command.Parameters.AddWithValue("@quantityType", quantityType);
-        //    command.Parameters.AddWithValue("@quantity", quantity.ToString());
-        //    command.Parameters.AddWithValue("@price", price.ToString());
-
-        //    command.ExecuteNonQuery();
-        //    DatabaseConClose();
-        //}
-
         public void SqlUpdateData(string[] data, ArrayList value, string id, string whichCondition, string tableName)
         {
             DatabaseConOpen();
@@ -244,6 +191,22 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
 
         }
 
+        public void GetDataInListView(string query, string[] getdata, string listData, params Control[] boxes)
+        {
+            for (int i = 0; i < boxes.Length; i++)
+            {
+                boxes[i].Text = GetData(query + listData + "'", getdata[i]);
+            }   
+        }
+
+        public void GetDataforBox(string query, string id, string[] getdata, params Control[] boxes)
+        {
+            for (int i = 0; i < boxes.Length; i++)
+            {
+                boxes[i].Text = GetData(query + id + "'", getdata[i]);
+            }
+        }
+
 
         //Private Method
 
@@ -280,19 +243,5 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
 
             return reader;
         }
-
-        //Data Count 
-        private void GetDataCounti(string query)
-        {
-            DatabaseConOpen();
-
-            command = new SqlCommand(query, sql);
-            _dataCound = Convert.ToInt32(command.ExecuteScalar());
-
-            DatabaseConClose();
-        }
-
-
-
     }
 }

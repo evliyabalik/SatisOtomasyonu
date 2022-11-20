@@ -210,6 +210,7 @@ namespace Perakende_Satış_Otomasyonu
             this.btnSatisRaporu.TabIndex = 12;
             this.btnSatisRaporu.Text = "Satış Raporu";
             this.btnSatisRaporu.UseVisualStyleBackColor = true;
+            this.btnSatisRaporu.Click += new System.EventHandler(this.btnSatisRaporu_Click);
             // 
             // BompNamePannel
             // 
@@ -266,26 +267,26 @@ namespace Perakende_Satış_Otomasyonu
             // 
             this.ürünKartlarıToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.ürünKartlarıToolStripMenuItem.Name = "ürünKartlarıToolStripMenuItem";
-            this.ürünKartlarıToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ürünKartlarıToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.ürünKartlarıToolStripMenuItem.Text = "Ürün Kartları";
             this.ürünKartlarıToolStripMenuItem.Click += new System.EventHandler(this.ürünKartlarıToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(137, 6);
             // 
             // ürünGirişiToolStripMenuItem
             // 
             this.ürünGirişiToolStripMenuItem.Name = "ürünGirişiToolStripMenuItem";
-            this.ürünGirişiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ürünGirişiToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.ürünGirişiToolStripMenuItem.Text = "Ürün Girişi";
             this.ürünGirişiToolStripMenuItem.Click += new System.EventHandler(this.ürünGirişiToolStripMenuItem_Click);
             // 
             // ürünÇıkışıToolStripMenuItem
             // 
             this.ürünÇıkışıToolStripMenuItem.Name = "ürünÇıkışıToolStripMenuItem";
-            this.ürünÇıkışıToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ürünÇıkışıToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.ürünÇıkışıToolStripMenuItem.Text = "Ürün Çıkışı";
             this.ürünÇıkışıToolStripMenuItem.Click += new System.EventHandler(this.ürünÇıkışıToolStripMenuItem_Click);
             // 

@@ -51,10 +51,6 @@ namespace Perakende_Satış_Otomasyonu.Panels
                 data.SearchDataInListView("select * from Urun where Urun_adi like '" + txtUrunAdi.Text + "'", lstSearchList, dataName);
             else if (rdbBarkod.Checked)
                 data.SearchDataInListView("select * from Urun where Urun_barkod like '" + txtUrunAdi.Text + "'", lstSearchList, dataName);
-                //data.SearchData(lstSearchList, "select * from Urun where Urun_barkod like '" + txtUrunAdi.Text + "'");
-
-            
-
         }
 
         private void Ürün_Kartları_Arama_Load(object sender, EventArgs e)

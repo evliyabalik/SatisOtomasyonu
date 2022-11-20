@@ -52,23 +52,24 @@ namespace Perakende_Satış_Otomasyonu.Panels
                         MessageBox.Show("Kullanıcı Zaten Mevcut!", "Dikkat");
                     else
                     {
-                        //data.ExecuteCommand("Insert into Users (User_name, User_surname, User_nickname, User_password, User_email, User_tel, User_position, User_authority) values ('" + txtAdi.Text + "','" + txtSoyadi.Text + "','" + txtKullaniciAdi.Text + "','" + txtSifre.Text + "','" + txtEmail.Text + "','" + txtCep.Text + "','" + cmbPosition.Text + "','" + cmbYetki.Text + "')");
                         data.SqlInsertData(userData, userDataValues, "Users");
                         MessageBox.Show("Kullanıcı Eklendi.", "Info");
+
                         lstUsers.Items.Clear();
                         data.AddDataToListview("select * from Users", dataName, lstUsers);
                     }
                 }
                 else
                     MessageBox.Show("Lütfen Tüm Alanları Doldurun!", "Dikkat");
-
-                userData = null;
-                userDataValues = null;
-
             }
             catch (Exception)
             {
                 MessageBox.Show("Kullanıcı eklenemedi! Lütfen Bilgilerinizi Kontrol Ediniz.", "Dikkat");
+            }
+            finally
+            {
+                userData = null;
+                userDataValues = null;
             }
         }
 

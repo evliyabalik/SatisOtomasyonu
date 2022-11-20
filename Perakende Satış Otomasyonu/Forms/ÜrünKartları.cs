@@ -9,28 +9,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Perakende_Satış_Otomasyonu.Class.Database;
+using Perakende_Satış_Otomasyonu.Class.Program;
 
 namespace Perakende_Satış_Otomasyonu.Panels
 {
     public partial class ÜrünKartları : Form
     {
         Database data = new Database();
-        int count;
-        string[] dataName = { "Urun_barkod", "Urun_grup", "Urun_adi", "Urun_birimi", "Urun_fiyati" };
+        SatisOtomasyon otomasyon = new SatisOtomasyon();
+
+        string[] dataName = { "Urun_barkod", "Urun_grup", "Urun_adi", "Urun_birimi", "Urun_fiyati", "Urun_miktari" };
+        //string[] dataName2 = { "Urun_barkod", "Urun_grup", "Urun_adi", "Urun_birimi", "Urun_fiyati", "Urun_miktari" };
 
 
         public ÜrünKartları()
         {
             InitializeComponent();
-            count= data.GetDataCount("select count(*) from Urun");
-
-
-            //data.AddDataListView(lstUrunKartlari);
-            data.AddDataToListview("select * from Urun order by Urun_id Desc", dataName, lstUrunKartlari);
+            data.DataCount = data.GetDataCount("select*from Urun");
+            if (data.DataCount!=0)
+                data.AddDataToListview("select * from Urun order by Urun_id Desc", dataName, lstUrunKartlari);
 
 
             if (Database.selectValueId != null)
-                GetDataInListView();
+                data.GetDataInListView("select * from Urun where Urun_barkod like", dataName, lstUrunKartlari.SelectedItems[0].SubItems[0].Text, txtBarkod, cmbGrup, txtUrunAdi, cmbBirim, txtBirimFiyati, txtKritikSeviye);
 
 
         }
@@ -45,15 +46,15 @@ namespace Perakende_Satış_Otomasyonu.Panels
         {
             //For Insert command of Array
             string[] productData = { "Urun_barkod, Urun_grup, Urun_adi, Urun_birimi, Urun_miktari, Urun_fiyati" };
-            ArrayList productDataValues=new ArrayList() { txtBarkod.Text+"','"+ cmbGrup.Text + "','" + txtUrunAdi.Text + "','" + cmbBirim.Text + "','" + Int32.Parse(txtKritikSeviye.Text) + "','" + decimal.Parse(txtBirimFiyati.Text) };
+            ArrayList productDataValues=new ArrayList() { txtBarkod.Text+"','"+ cmbGrup.Text + "','" + txtUrunAdi.Text + "','" + cmbBirim.Text + "','" + Int32.Parse(txtKritikSeviye.Text) + "','" + Math.Round(double.Parse(txtBirimFiyati.Text),2) };
 
             //For Update command of Array
             string[] productDataU = { "Urun_barkod"," Urun_grup", " Urun_adi", " Urun_birimi", " Urun_miktari", " Urun_fiyati" };
-            ArrayList productDataValuesU = new ArrayList() { txtBarkod.Text ,  cmbGrup.Text ,  txtUrunAdi.Text, cmbBirim.Text, Int32.Parse(txtKritikSeviye.Text), decimal.Parse(txtBirimFiyati.Text) };
+            ArrayList productDataValuesU = new ArrayList() { txtBarkod.Text ,  cmbGrup.Text ,  txtUrunAdi.Text, cmbBirim.Text, Int32.Parse(txtKritikSeviye.Text), Math.Round(double.Parse(txtBirimFiyati.Text), 2) };
 
             try
             {
-                if (data.IsHaveData("Select * from Urun","Urun_barkod",txtBarkod.Text) && data.IsHaveData("Select * from Urun", "Urun_adi", txtUrunAdi.Text)) 
+                if (Database.selectValueId==null) 
                 {
                     
                     data.SqlInsertData(productData, productDataValues, "Urun");
@@ -66,14 +67,21 @@ namespace Perakende_Satış_Otomasyonu.Panels
                     lstUrunKartlari.Items.Clear();
                     data.AddDataToListview("select * from Urun order by Urun_id Desc", dataName, lstUrunKartlari);
                 }
-                productData = null;
-                productDataU = null;
-                productDataValues = null;
-                productDataValuesU = null;
+
+                lblUrunSayisi.Text = lstUrunKartlari.Items.Count.ToString();
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Ürün Eklenemedi. " + ex);
+            }
+            finally
+            {
+
+                productData = null;
+                productDataU = null;
+                productDataValues = null;
+                productDataValuesU = null;
             }
         }
 
@@ -83,9 +91,9 @@ namespace Perakende_Satış_Otomasyonu.Panels
             data.AddItemCmb(cmbGrup, "select * from GroupsTable", "Group_name");
             data.AddItemCmb(cmbBirim, "select * from Units", "Unit_name");
 
-            NewProductClick();
 
-
+            otomasyon.NewProductClick(txtBarkod, txtBirimFiyati, txtKritikSeviye, txtUrunAdi);
+            otomasyon.NewProductClick(cmbBirim, cmbGrup);
 
         }
 
@@ -102,12 +110,13 @@ namespace Perakende_Satış_Otomasyonu.Panels
 
         private void lstUrunKartlari_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-                GetDataInListView();
+            Database.selectValueId = data.GetData("select * from Urun where Urun_barkod like '" + lstUrunKartlari.SelectedItems[0].SubItems[0].Text + "'", "Urun_id");
+            data.GetDataInListView("select * from Urun where Urun_barkod like'", dataName, lstUrunKartlari.SelectedItems[0].SubItems[0].Text, txtBarkod, cmbGrup, txtUrunAdi, cmbBirim, txtBirimFiyati, txtKritikSeviye);
+
         }
 
         private void btnSil_Click(object sender, EventArgs e)
         {
-
             if (Database.selectValueId != null)
             {
                 data.ExecuteCommand("Delete from Urun where Urun_id=" + Database.selectValueId);
@@ -125,11 +134,16 @@ namespace Perakende_Satış_Otomasyonu.Panels
             {
                 data.ExecuteCommand("Delete from Urun_giris where Urun_giris_id=" + Database.selectValueId);
             }
+
+            Database.selectValueId = null;
+            lblUrunSayisi.Text = lstUrunKartlari.Items.Count.ToString();
         }
 
         private void btnYeniUrun_Click(object sender, EventArgs e)
         {
-            NewProductClick();
+            Database.selectValueId = null;
+            otomasyon.NewProductClick(txtBarkod, txtBirimFiyati, txtKritikSeviye, txtUrunAdi);
+            otomasyon.NewProductClick(cmbBirim,cmbGrup);
         }
 
         private void btnUrunArama_Click(object sender, EventArgs e)
@@ -138,67 +152,36 @@ namespace Perakende_Satış_Otomasyonu.Panels
             search.Show();
         }
 
-
-
-        private void GetDataInListView()
-        {
-            Database.selectValueId = data.GetData("select * from Urun where Urun_barkod like '" + lstUrunKartlari.SelectedItems[0].SubItems[0].Text + "' ", "Urun_id");
-            if (Database.selectValueId != null)
-            {
-                cmbGrup.Text = data.GetData("select * from Urun where Urun_barkod like '" + lstUrunKartlari.SelectedItems[0].SubItems[0].Text + "' ", "Urun_grup");
-                txtBarkod.Text = data.GetData("select * from Urun where Urun_barkod like '" + lstUrunKartlari.SelectedItems[0].SubItems[0].Text + "' ", "Urun_barkod");
-                txtUrunAdi.Text = data.GetData("select * from Urun where Urun_barkod like '" + lstUrunKartlari.SelectedItems[0].SubItems[0].Text + "' ", "Urun_adi");
-                cmbBirim.Text = data.GetData("select * from Urun where Urun_barkod like '" + lstUrunKartlari.SelectedItems[0].SubItems[0].Text + "' ", "Urun_birimi");
-                txtKritikSeviye.Text = data.GetData("select * from Urun where Urun_barkod like '" + lstUrunKartlari.SelectedItems[0].SubItems[0].Text + "' ", "Urun_miktari");
-                txtBirimFiyati.Text = data.GetData("select * from Urun where Urun_barkod like '" + lstUrunKartlari.SelectedItems[0].SubItems[0].Text + "' ", "Urun_fiyati");
-            }
-           
-        }
-
-        private void GetDataInListView(string valueId)
-        {
-            if (Database.selectValueId != null)
-            {
-                cmbGrup.Text = data.GetData("select * from Urun where Urun_id like '" + valueId + "' ", "Urun_grup");
-                txtBarkod.Text = data.GetData("select * from Urun where Urun_id like '" + valueId + "' ", "Urun_barkod");
-                txtUrunAdi.Text = data.GetData("select * from Urun where Urun_id like '" + valueId + "' ", "Urun_adi");
-                cmbBirim.Text = data.GetData("select * from Urun where Urun_id like '" + valueId + "' ", "Urun_birimi");
-                txtKritikSeviye.Text = data.GetData("select * from Urun where Urun_id like '" + valueId + "' ", "Urun_miktari");
-                txtBirimFiyati.Text = data.GetData("select * from Urun where Urun_id like '" + valueId + "' ", "Urun_fiyati");
-            }
-        }
-
-        private void NewProductClick()
-        {
-            Database.selectValueId = null;
-            cmbGrup.Text = cmbGrup.Items[0].ToString();
-            txtBarkod.Text = null;
-            txtUrunAdi.Text = null;
-            cmbBirim.Text = cmbBirim.Items[0].ToString();
-            txtKritikSeviye.Text = null;
-            txtBirimFiyati.Text = null;
-        }
-
         private void ÜrünKartları_Activated(object sender, EventArgs e)
         {
+            
             if (Database.selectValueId != null)
-                GetDataInListView(Database.selectValueId);
+                data.GetDataInListView("select * from Urun where Urun_id like'", dataName, Database.selectValueId, txtBarkod, cmbGrup, txtUrunAdi, cmbBirim, txtBirimFiyati, txtKritikSeviye);
         }
 
         private void ÜrünKartları_Deactivate(object sender, EventArgs e)
         {
-           // NewProductClick();
+
         }
 
         private void btnGrupEkle_Click(object sender, EventArgs e)
         {
-            data.ExecuteCommand("insert Into GroupsTable (Group_name) values('"+ cmbGrup.Text +"')");
-            cmbGrup.Items.Add(cmbGrup.Text);
+            if (data.IsHaveData("Select*from GroupsTable", "Group_name", cmbGrup.Text))
+            {
+                data.ExecuteCommand("insert Into GroupsTable (Group_name) values('" + cmbGrup.Text + "')");
+                cmbGrup.Items.Add(cmbGrup.Text);
+            }
+            else
+            {
+                MessageBox.Show("Grup ismi mevcut.", "Dikkat");
+            }
         }
 
         private void ÜrünKartları_FormClosed(object sender, FormClosedEventArgs e)
         {
-            NewProductClick();
+            
+            otomasyon.NewProductClick(txtBarkod, txtBirimFiyati, txtKritikSeviye, txtUrunAdi);
+            otomasyon.NewProductClick(cmbBirim, cmbGrup);
         }
 
         private void ÜrünKartları_FormClosing(object sender, FormClosingEventArgs e)

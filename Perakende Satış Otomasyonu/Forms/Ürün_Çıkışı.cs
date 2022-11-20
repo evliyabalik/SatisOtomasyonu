@@ -1,5 +1,6 @@
 ﻿using Perakende_Satış_Otomasyonu.Class.Database;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,20 +22,30 @@ namespace Perakende_Satış_Otomasyonu.Panels
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            if (Database.selectValueId != null)
+            string[] dataArray = { "Urun_cikis_id, Urun_cikis_tarih, Urun_cikis_aciklama, Urun_cikis_barkod, Urun_cikis_adi, Urun_cikis_miktari" };
+            ArrayList valuesArray = new ArrayList() { Database.selectValueId + "','" + cmbTarih.Text + "','" + rtbAciklama.Text + "','" + txtBarkod.Text + "','" + txtUrunAdi.Text + "','" +Int32.Parse(txtCikisMiktari.Text) };
+
+            try
+            {
+                DialogResult toDecide = MessageBox.Show(txtUrunAdi.Text + " ürününden " + txtCikisMiktari.Text + " adet çıkış yapılacak onaylıyor musunuz?", "Bilgilendirme", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (toDecide == DialogResult.OK)
+                    if (Database.selectValueId != null)
+                    {
+                        data.SqlInsertData(dataArray, valuesArray, "Urun_cikis");
+                        MessageBox.Show("Ürün çıkışı başarıyla Yapıldı.", "Bilgilendirme");
+                    }
+                if (toDecide == DialogResult.Cancel)
+                    MessageBox.Show("Ürün Çıkışı Yapılmadı", "Bilgilendirme");
+            }
+            catch (Exception error)
             {
 
-                string urun_id = Database.selectValueId;
-                string tarih = cmbTarih.Text;
-                string aciklama = rtbAciklama.Text;
-
-
-                txtBarkod.Text = data.GetData("select * from Urun where Urun_id like '" + Database.selectValueId + "' ", "Urun_barkod");
-                txtUrunAdi.Text = data.GetData("select * from Urun where Urun_id like '" + Database.selectValueId + "' ", "Urun_adi");
-
-                int cikisMiktari = Int32.Parse(txtCikisMiktari.Text);
-
-                data.ExecuteCommand("insert into Urun_cikis (Urun_cikis_id, Urun_cikis_tarih, Urun_cikis_aciklama, Urun_cikis_barkod, Urun_cikis_adi, Urun_cikis_miktari) values ('" + urun_id + "','" + tarih + "','" + aciklama + "','" + txtBarkod.Text + "','" + txtUrunAdi.Text  + "','" + cikisMiktari + "')");
+                MessageBox.Show("Hata Ürün eklenmedi. " + error, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                dataArray = null;
+                valuesArray = null;
             }
         }
 
@@ -62,16 +73,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
         private void Ürün_Çıkışı_Activated(object sender, EventArgs e)
         {
             if (Database.selectValueId != null)
-                GetDataInListView(Database.selectValueId);
-        }
-
-        private void GetDataInListView(string valueId)
-        {
-            if (Database.selectValueId != null)
-            {
-                txtBarkod.Text = data.GetData("select * from Urun where Urun_id like '" + valueId + "' ", "Urun_barkod");
-                txtUrunAdi.Text = data.GetData("select * from Urun where Urun_id like '" + valueId + "' ", "Urun_adi");
-            }
+                data.GetDataforBox("select * from Urun where Urun_id like '", Database.selectValueId, new string[] { "Urun_barkod", "Urun_adi" }, txtBarkod, txtUrunAdi);
         }
 
         private void btnKapat_Click(object sender, EventArgs e)

@@ -104,5 +104,10 @@ namespace Perakende_Satış_Otomasyonu
             cikisUrun.Show();
             
         }
+
+        private void btnSatisRaporu_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
