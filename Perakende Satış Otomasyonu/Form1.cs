@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Perakende_Satış_Otomasyonu.Panels;
 using Perakende_Satış_Otomasyonu.Class.Database;
+using Perakende_Satış_Otomasyonu.Forms;
 
 namespace Perakende_Satış_Otomasyonu
 {
@@ -27,13 +28,13 @@ namespace Perakende_Satış_Otomasyonu
             urunGiris = new Ürün_Girişi();
             cikisUrun = new Ürün_Çıkışı();
             
-            if(data.GetDataCount("select Firma_id from Firma_Bilgileri")>0)
-                lblCompanyName.Text = data.GetData("select * from Firma_Bilgileri", "Firma_adi");
+            //if(data.GetDataCount("select Firma_id from Firma_Bilgileri")>0)
+            //    lblCompanyName.Text = data.GetData("select * from Firma_Bilgileri", "Firma_adi");
 
-            if (data.GetDataCount("select Firma_id from Firma_Bilgileri") == 0)
-                firmaBilgileri.Show();
-            else
-                return;
+            //if (data.GetDataCount("select Firma_id from Firma_Bilgileri") == 0)
+            //    firmaBilgileri.Show();
+            //else
+                //return;
 
 
         }
@@ -55,7 +56,8 @@ namespace Perakende_Satış_Otomasyonu
 
         private void btnSatisMenusu_Click(object sender, EventArgs e)
         {
-
+            Satis s = new Satis();
+            s.Show();
         }
 
         private void btnUrunKartlari_Click(object sender, EventArgs e)
@@ -84,8 +86,8 @@ namespace Perakende_Satış_Otomasyonu
 
         private void MainForm_Activated(object sender, EventArgs e)
         {
-            if (data.GetDataCount("select Firma_id from Firma_Bilgileri") > 0)
-                lblCompanyName.Text = data.GetData("select * from Firma_Bilgileri", "Firma_adi");
+            //if (data.GetDataCount("select Firma_id from Firma_Bilgileri") > 0)
+            //    lblCompanyName.Text = data.GetData("select * from Firma_Bilgileri", "Firma_adi");
         }
 
         private void ürünKartlarıToolStripMenuItem_Click(object sender, EventArgs e)
@@ -107,7 +109,38 @@ namespace Perakende_Satış_Otomasyonu
 
         private void btnSatisRaporu_Click(object sender, EventArgs e)
         {
-            
+            SatisRaporu srapor = new SatisRaporu();
+            srapor.Show();
+        }
+
+        private void btnStokRaporu_Click(object sender, EventArgs e)
+        {
+            StokDurumRaporu stokRapor = new StokDurumRaporu();
+            stokRapor.Show();
+        }
+
+        private void btnHareketRaporu_Click(object sender, EventArgs e)
+        {
+            UrunHareketRaporu hareketRapor = new UrunHareketRaporu();
+            hareketRapor.Show();
+        }
+
+        private void tarihBazlıStokDurumRaporuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Tarih_bazli_stok_raporu tbsraporu = new Tarih_bazli_stok_raporu();
+            tbsraporu.Show();
+        }
+
+        private void satışKarRaporuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Kar_Raporu sraporu = new Kar_Raporu();
+            sraporu.Show();
+        }
+
+        private void giderRaporuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Gider_Raporu gRaporu = new Gider_Raporu();
+            gRaporu.Show();
         }
     }
 }

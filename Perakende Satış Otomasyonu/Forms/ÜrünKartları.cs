@@ -25,13 +25,13 @@ namespace Perakende_Satış_Otomasyonu.Panels
         public ÜrünKartları()
         {
             InitializeComponent();
-            data.DataCount = data.GetDataCount("select*from Urun");
-            if (data.DataCount!=0)
-                data.AddDataToListview("select * from Urun order by Urun_id Desc", dataName, lstUrunKartlari);
+            //data.DataCount = data.GetDataCount("select*from Urun");
+            //if (data.DataCount!=0)
+            //    data.AddDataToListview("select * from Urun order by Urun_id Desc", dataName, lstUrunKartlari);
 
 
-            if (Database.selectValueId != null)
-                data.GetDataInListView("select * from Urun where Urun_barkod like", dataName, lstUrunKartlari.SelectedItems[0].SubItems[0].Text, txtBarkod, cmbGrup, txtUrunAdi, cmbBirim, txtBirimFiyati, txtKritikSeviye);
+            //if (Database.selectValueId != null)
+            //    data.GetDataInListView("select * from Urun where Urun_barkod like", dataName, lstUrunKartlari.SelectedItems[0].SubItems[0].Text, txtBarkod, cmbGrup, txtUrunAdi, cmbBirim, txtBirimFiyati, txtKritikSeviye);
 
 
         }
@@ -87,13 +87,13 @@ namespace Perakende_Satış_Otomasyonu.Panels
 
         private void ÜrünKartları_Load(object sender, EventArgs e)
         {
-            lblUrunSayisi.Text = lstUrunKartlari.Items.Count.ToString();
-            data.AddItemCmb(cmbGrup, "select * from GroupsTable", "Group_name");
-            data.AddItemCmb(cmbBirim, "select * from Units", "Unit_name");
+            //lblUrunSayisi.Text = lstUrunKartlari.Items.Count.ToString();
+            //data.AddItemCmb(cmbGrup, "select * from GroupsTable", "Group_name");
+            //data.AddItemCmb(cmbBirim, "select * from Units", "Unit_name");
 
 
-            otomasyon.NewProductClick(txtBarkod, txtBirimFiyati, txtKritikSeviye, txtUrunAdi);
-            otomasyon.NewProductClick(cmbBirim, cmbGrup);
+            //otomasyon.NewProductClick(txtBarkod, txtBirimFiyati, txtKritikSeviye, txtUrunAdi);
+            //otomasyon.NewProductClick(cmbBirim, cmbGrup);
 
         }
 
@@ -155,8 +155,8 @@ namespace Perakende_Satış_Otomasyonu.Panels
         private void ÜrünKartları_Activated(object sender, EventArgs e)
         {
             
-            if (Database.selectValueId != null)
-                data.GetDataInListView("select * from Urun where Urun_id like'", dataName, Database.selectValueId, txtBarkod, cmbGrup, txtUrunAdi, cmbBirim, txtBirimFiyati, txtKritikSeviye);
+            //if (Database.selectValueId != null)
+            //    data.GetDataInListView("select * from Urun where Urun_id like'", dataName, Database.selectValueId, txtBarkod, cmbGrup, txtUrunAdi, cmbBirim, txtBirimFiyati, txtKritikSeviye);
         }
 
         private void ÜrünKartları_Deactivate(object sender, EventArgs e)
@@ -180,8 +180,8 @@ namespace Perakende_Satış_Otomasyonu.Panels
         private void ÜrünKartları_FormClosed(object sender, FormClosedEventArgs e)
         {
             
-            otomasyon.NewProductClick(txtBarkod, txtBirimFiyati, txtKritikSeviye, txtUrunAdi);
-            otomasyon.NewProductClick(cmbBirim, cmbGrup);
+            //otomasyon.NewProductClick(txtBarkod, txtBirimFiyati, txtKritikSeviye, txtUrunAdi);
+            //otomasyon.NewProductClick(cmbBirim, cmbGrup);
         }
 
         private void ÜrünKartları_FormClosing(object sender, FormClosingEventArgs e)

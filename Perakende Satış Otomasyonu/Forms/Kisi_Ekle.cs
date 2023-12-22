@@ -24,13 +24,13 @@ namespace Perakende_Satış_Otomasyonu.Panels
 
         private void Kisi_Ekle_Load(object sender, EventArgs e)
         {
-            data.AddDataToListview("select * from Users" , dataName, lstUsers);
+            //data.AddDataToListview("select * from Users" , dataName, lstUsers);
 
-            data.AddItemCmb(cmbPosition, "select * from Personal_Positions", "Position_name");
-            data.AddItemCmb(cmbYetki, "select * from Personal_Authority", "Authority_name");
+            //data.AddItemCmb(cmbPosition, "select * from Personal_Positions", "Position_name");
+            //data.AddItemCmb(cmbYetki, "select * from Personal_Authority", "Authority_name");
 
-            cmbPosition.Text = cmbPosition.Items[0].ToString();
-            cmbYetki.Text = cmbYetki.Items[0].ToString();
+            //cmbPosition.Text = cmbPosition.Items[0].ToString();
+            //cmbYetki.Text = cmbYetki.Items[0].ToString();
         }
 
         

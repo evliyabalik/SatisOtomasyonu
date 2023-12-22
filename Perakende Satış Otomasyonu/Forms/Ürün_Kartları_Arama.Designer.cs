@@ -196,7 +196,7 @@ namespace Perakende_Satış_Otomasyonu.Panels
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Ürün_Kartları_Arama";
-            this.Text = "Ürün Kartları";
+            this.Text = "Ürün Arama";
             this.Load += new System.EventHandler(this.Ürün_Kartları_Arama_Load);
             this.groupBox1.ResumeLayout(false);
             this.Adanba.ResumeLayout(false);

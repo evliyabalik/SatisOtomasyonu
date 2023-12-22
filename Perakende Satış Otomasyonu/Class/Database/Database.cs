@@ -26,22 +26,22 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
         SqlDataReader reader;
 
 
-        //Constructer Method
-        public Database()
-        {
-            if (this.sql.ConnectionString == null || sql.ConnectionString == "")
-                this.sql.ConnectionString = ConnectionString;
+        ////Constructer Method
+        //public Database()
+        //{
+        //    //if (this.sql.ConnectionString == null || sql.ConnectionString == "")
+        //    //    this.sql.ConnectionString = ConnectionString;
 
-            if (this.sql.State == System.Data.ConnectionState.Closed)
-                this.sql.Open();
+        //    //if (this.sql.State == System.Data.ConnectionState.Closed)
+        //    //    this.sql.Open();
 
-        }
+        //}
 
         //Add data to list view
-        public void AddDataToListview(string query,string[] dataArray, ListView lstView)
+        public void AddDataToListview(string query, string[] dataArray, ListView lstView)
         {
             DatabaseConOpen();
-            
+
             reader = GetReadData(query);
             if (reader.HasRows)
             {
@@ -56,7 +56,7 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
                             continue;
                         }
                         item.SubItems.Add(reader[dataArray[i].ToString()].ToString());
-                        
+
                     }
                     lstView.Items.Add(item);
                 }
@@ -87,7 +87,7 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
                 while (reader.Read())
                 {
                     ListViewItem item = new ListViewItem();
-                    
+
                     for (int i = 0; i < listView.Columns.Count; i++)
                     {
                         if (i == 0)
@@ -108,13 +108,13 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
             DatabaseConOpen();
             for (int i = 0; i < data.Length; i++)
             {
-                command = new SqlCommand("Insert into "+tableName+" (" + data[i].ToString() + ") values ('" + values[i].ToString() + "')", sql);
+                command = new SqlCommand("Insert into " + tableName + " (" + data[i].ToString() + ") values ('" + values[i].ToString() + "')", sql);
             }
             command.ExecuteNonQuery();
             DatabaseConClose();
         }
 
-        
+
         public void SqlUpdateData(string[] data, ArrayList value, string id, string whichCondition, string tableName)
         {
             DatabaseConOpen();
@@ -146,7 +146,7 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
         public void AddItemCmb(ComboBox cmb, string query, string data)
         {
             DatabaseConOpen();
-            
+
             using (command = new SqlCommand(query, sql))
             {
                 using (reader = command.ExecuteReader())
@@ -196,7 +196,7 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
             for (int i = 0; i < boxes.Length; i++)
             {
                 boxes[i].Text = GetData(query + listData + "'", getdata[i]);
-            }   
+            }
         }
 
         public void GetDataforBox(string query, string id, string[] getdata, params Control[] boxes)
@@ -226,11 +226,11 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
         //Database open
         private void DatabaseConOpen()
         {
-            if (this.sql.ConnectionString == null || sql.ConnectionString == "")
-                this.sql.ConnectionString = ConnectionString;
+            //if (this.sql.ConnectionString == null || sql.ConnectionString == "")
+            //    this.sql.ConnectionString = ConnectionString;
 
-            if (this.sql.State == System.Data.ConnectionState.Closed)
-                this.sql.Open();
+            //if (this.sql.State == System.Data.ConnectionState.Closed)
+            //    this.sql.Open();
         }
 
 

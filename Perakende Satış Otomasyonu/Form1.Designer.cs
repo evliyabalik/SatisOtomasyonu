@@ -129,6 +129,7 @@ namespace Perakende_Satış_Otomasyonu
             this.btnHareketRaporu.TabIndex = 14;
             this.btnHareketRaporu.Text = "Hareket Raporu";
             this.btnHareketRaporu.UseVisualStyleBackColor = true;
+            this.btnHareketRaporu.Click += new System.EventHandler(this.btnHareketRaporu_Click);
             // 
             // btnQuit
             // 
@@ -175,6 +176,7 @@ namespace Perakende_Satış_Otomasyonu
             this.btnStokRaporu.TabIndex = 13;
             this.btnStokRaporu.Text = "Stok Raporu";
             this.btnStokRaporu.UseVisualStyleBackColor = true;
+            this.btnStokRaporu.Click += new System.EventHandler(this.btnStokRaporu_Click);
             // 
             // btnUrunKartlari
             // 
@@ -303,14 +305,15 @@ namespace Perakende_Satış_Otomasyonu
             // girişFormuToolStripMenuItem
             // 
             this.girişFormuToolStripMenuItem.Name = "girişFormuToolStripMenuItem";
-            this.girişFormuToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.girişFormuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.girişFormuToolStripMenuItem.Text = "Giriş Formu";
             // 
             // giderRaporuToolStripMenuItem
             // 
             this.giderRaporuToolStripMenuItem.Name = "giderRaporuToolStripMenuItem";
-            this.giderRaporuToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.giderRaporuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.giderRaporuToolStripMenuItem.Text = "Gider Raporu";
+            this.giderRaporuToolStripMenuItem.Click += new System.EventHandler(this.giderRaporuToolStripMenuItem_Click);
             // 
             // satışToolStripMenuItem
             // 
@@ -349,6 +352,7 @@ namespace Perakende_Satış_Otomasyonu
             this.satışKarRaporuToolStripMenuItem.Name = "satışKarRaporuToolStripMenuItem";
             this.satışKarRaporuToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             this.satışKarRaporuToolStripMenuItem.Text = "Satış Kar Raporu";
+            this.satışKarRaporuToolStripMenuItem.Click += new System.EventHandler(this.satışKarRaporuToolStripMenuItem_Click);
             // 
             // stokDurumRaporuToolStripMenuItem
             // 
@@ -367,6 +371,7 @@ namespace Perakende_Satış_Otomasyonu
             this.tarihBazlıStokDurumRaporuToolStripMenuItem.Name = "tarihBazlıStokDurumRaporuToolStripMenuItem";
             this.tarihBazlıStokDurumRaporuToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             this.tarihBazlıStokDurumRaporuToolStripMenuItem.Text = "Tarih Bazlı Stok Durum Raporu";
+            this.tarihBazlıStokDurumRaporuToolStripMenuItem.Click += new System.EventHandler(this.tarihBazlıStokDurumRaporuToolStripMenuItem_Click);
             // 
             // firmaBilgileriToolStripMenuItem
             // 
