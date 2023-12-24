@@ -27,14 +27,14 @@ namespace Perakende_Satış_Otomasyonu
             Firma_Bilgileri firmaBilgileri = new Firma_Bilgileri();
             urunGiris = new Ürün_Girişi();
             cikisUrun = new Ürün_Çıkışı();
-            
-            //if(data.GetDataCount("select Firma_id from Firma_Bilgileri")>0)
-            //    lblCompanyName.Text = data.GetData("select * from Firma_Bilgileri", "Firma_adi");
 
-            //if (data.GetDataCount("select Firma_id from Firma_Bilgileri") == 0)
-            //    firmaBilgileri.Show();
-            //else
-                //return;
+            if (data.GetDataCount("select Firma_id from Firma_Bilgileri") > 0)
+                lblCompanyName.Text = data.GetData("select * from Firma_Bilgileri", "Firma_adi");
+
+            if (data.GetDataCount("select Firma_id from Firma_Bilgileri") == 0)
+                firmaBilgileri.Show();
+            else
+                return;
 
 
         }
@@ -86,8 +86,8 @@ namespace Perakende_Satış_Otomasyonu
 
         private void MainForm_Activated(object sender, EventArgs e)
         {
-            //if (data.GetDataCount("select Firma_id from Firma_Bilgileri") > 0)
-            //    lblCompanyName.Text = data.GetData("select * from Firma_Bilgileri", "Firma_adi");
+            if (data.GetDataCount("select Firma_id from Firma_Bilgileri") > 0)
+                lblCompanyName.Text = data.GetData("select * from Firma_Bilgileri", "Firma_adi");
         }
 
         private void ürünKartlarıToolStripMenuItem_Click(object sender, EventArgs e)

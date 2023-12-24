@@ -26,16 +26,16 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
         SqlDataReader reader;
 
 
-        ////Constructer Method
-        //public Database()
-        //{
-        //    //if (this.sql.ConnectionString == null || sql.ConnectionString == "")
-        //    //    this.sql.ConnectionString = ConnectionString;
+        //Constructer Method
+        public Database()
+        {
+            if (this.sql.ConnectionString == null || sql.ConnectionString == "")
+                this.sql.ConnectionString = ConnectionString;
 
-        //    //if (this.sql.State == System.Data.ConnectionState.Closed)
-        //    //    this.sql.Open();
+            if (this.sql.State == System.Data.ConnectionState.Closed)
+                this.sql.Open();
 
-        //}
+        }
 
         //Add data to list view
         public void AddDataToListview(string query, string[] dataArray, ListView lstView)
@@ -226,11 +226,11 @@ namespace Perakende_Satış_Otomasyonu.Class.Database
         //Database open
         private void DatabaseConOpen()
         {
-            //if (this.sql.ConnectionString == null || sql.ConnectionString == "")
-            //    this.sql.ConnectionString = ConnectionString;
+            if (this.sql.ConnectionString == null || sql.ConnectionString == "")
+                this.sql.ConnectionString = ConnectionString;
 
-            //if (this.sql.State == System.Data.ConnectionState.Closed)
-            //    this.sql.Open();
+            if (this.sql.State == System.Data.ConnectionState.Closed)
+                this.sql.Open();
         }
 
 
